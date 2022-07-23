@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.woniuxy.snailrestaurant.mapper.OnDutyArrangeMapper">
+
+    <resultMap id="BaseResultMap" type="com.woniuxy.snailrestaurant.domain.OnDutyArrange">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="empId" column="emp_id" jdbcType="INTEGER"/>
+            <result property="monArrange" column="mon_arrange" jdbcType="TINYINT"/>
+            <result property="tueArrange" column="tue__arrange" jdbcType="TINYINT"/>
+            <result property="wedArrange" column="wed_arrange" jdbcType="TINYINT"/>
+            <result property="thuArrange" column="thu_arrange" jdbcType="TINYINT"/>
+            <result property="friArrange" column="fri_arrange" jdbcType="TINYINT"/>
+            <result property="satArrange" column="sat_arrange" jdbcType="TINYINT"/>
+            <result property="sunArrange" column="sun_arrange" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,emp_id,mon_arrange,
+        tue__arrange,wed_arrange,thu_arrange,
+        fri_arrange,sat_arrange,sun_arrange
+    </sql>
+</mapper>

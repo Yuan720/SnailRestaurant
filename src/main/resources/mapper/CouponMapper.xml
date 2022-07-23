@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.woniuxy.snailrestaurant.mapper.CouponMapper">
+
+    <resultMap id="BaseResultMap" type="com.woniuxy.snailrestaurant.domain.Coupon">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="value" column="value" jdbcType="DECIMAL"/>
+            <result property="minimumPay" column="minimum_pay" jdbcType="DECIMAL"/>
+            <result property="limitMerchantId" column="limit_merchant_id" jdbcType="INTEGER"/>
+            <result property="type" column="type" jdbcType="TINYINT"/>
+            <result property="discount" column="discount" jdbcType="TINYINT"/>
+            <result property="dishesSetId" column="dishes_set_id" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,value,minimum_pay,
+        limit_merchant_id,type,discount,
+        dishes_set_id
+    </sql>
+</mapper>

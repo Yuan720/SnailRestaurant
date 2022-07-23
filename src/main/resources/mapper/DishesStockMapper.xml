@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.woniuxy.snailrestaurant.mapper.DishesStockMapper">
+
+    <resultMap id="BaseResultMap" type="com.woniuxy.snailrestaurant.domain.DishesStock">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="dishesId" column="dishes_id" jdbcType="INTEGER"/>
+            <result property="merchantId" column="merchant_id" jdbcType="INTEGER"/>
+            <result property="type" column="type" jdbcType="VARCHAR"/>
+            <result property="unit" column="unit" jdbcType="VARCHAR"/>
+            <result property="lastCheckTime" column="last_check_time" jdbcType="TIMESTAMP"/>
+            <result property="lowThreshold" column="low_threshold" jdbcType="INTEGER"/>
+            <result property="upThreshold" column="up_threshold" jdbcType="INTEGER"/>
+            <result property="leftCount" column="left_count" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,name,dishes_id,
+        merchant_id,type,unit,
+        last_check_time,low_threshold,up_threshold,
+        left_count
+    </sql>
+</mapper>

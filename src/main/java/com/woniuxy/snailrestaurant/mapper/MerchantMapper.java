@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 /**
 * @author LeeYuan
 * @description 针对表【merchant(商家,餐厅表)】的数据库操作Mapper
-* @createDate 2022-07-23 12:00:58
+* @createDate 2022-07-23 12:06:44
 * @Entity com.woniuxy.snailrestaurant.domain.Merchant
 */
 public interface MerchantMapper extends BaseMapper<Merchant> {
