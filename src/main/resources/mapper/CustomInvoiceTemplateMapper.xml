@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.woniuxy.snailrestaurant.mapper.CustomInvoiceTemplateMapper">
+
+    <resultMap id="BaseResultMap" type="com.woniuxy.snailrestaurant.domain.CustomInvoiceTemplate">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="merchantId" column="merchant_id" jdbcType="INTEGER"/>
+            <result property="dMerchanName" column="d_merchan_name" jdbcType="TINYINT"/>
+            <result property="dWelcome" column="d_welcome" jdbcType="TINYINT"/>
+            <result property="welcomeWords" column="welcome_words" jdbcType="VARCHAR"/>
+            <result property="dInvoceType" column="d_invoce_type" jdbcType="TINYINT"/>
+            <result property="dOrderSeat" column="d_order_seat" jdbcType="TINYINT"/>
+            <result property="dCoustmerNum" column="d_coustmer_num" jdbcType="TINYINT"/>
+            <result property="dOrder" column="d_order" jdbcType="TINYINT"/>
+            <result property="dOrderTime" column="d_order_time" jdbcType="TINYINT"/>
+            <result property="dDeshesDetail" column="d_deshes_detail" jdbcType="TINYINT"/>
+            <result property="dRemarks" column="d_remarks" jdbcType="TINYINT"/>
+            <result property="dPaymentDetail" column="d_payment_detail" jdbcType="TINYINT"/>
+            <result property="dDiscountInfo" column="d_discount_info" jdbcType="TINYINT"/>
+            <result property="dAddtionMerchanAddr" column="d_addtion_merchan_addr" jdbcType="TINYINT"/>
+            <result property="dAddtionMerchanTel" column="d_addtion_merchan_tel" jdbcType="TINYINT"/>
+            <result property="dAddtionMerchanWchat" column="d_addtion_merchan_wchat" jdbcType="TINYINT"/>
+            <result property="dAddtionMerchanOrcode" column="d_addtion_merchan_orcode" jdbcType="TINYINT"/>
+            <result property="dAddtionMerchanWeixinProgram" column="d_addtion_merchan_weixin_program" jdbcType="TINYINT"/>
+            <result property="dAddtionTail" column="d_addtion_tail" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,merchant_id,d_merchan_name,
+        d_welcome,welcome_words,d_invoce_type,
+        d_order_seat,d_coustmer_num,d_order,
+        d_order_time,d_deshes_detail,d_remarks,
+        d_payment_detail,d_discount_info,d_addtion_merchan_addr,
+        d_addtion_merchan_tel,d_addtion_merchan_wchat,d_addtion_merchan_orcode,
+        d_addtion_merchan_weixin_program,d_addtion_tail
+    </sql>
+</mapper>

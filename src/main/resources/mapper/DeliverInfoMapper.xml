@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.woniuxy.snailrestaurant.mapper.DeliverInfoMapper">
+
+    <resultMap id="BaseResultMap" type="com.woniuxy.snailrestaurant.domain.DeliverInfo">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="recipientName" column="recipient_name" jdbcType="VARCHAR"/>
+            <result property="recipientTel" column="recipient_tel" jdbcType="VARCHAR"/>
+            <result property="addr" column="addr" jdbcType="VARCHAR"/>
+            <result property="asDefault" column="as_default" jdbcType="TINYINT"/>
+            <result property="tag" column="tag" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,recipient_name,recipient_tel,
+        addr,as_default,tag
+    </sql>
+</mapper>
