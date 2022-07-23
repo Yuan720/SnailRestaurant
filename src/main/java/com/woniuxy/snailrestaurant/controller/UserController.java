@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/user")
-@Api(tags = "用户api")
+@Api(tags = "用户")
 public class UserController {
 
     @ApiOperation(value = "用户登录,返回jwt令牌")

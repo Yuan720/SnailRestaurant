@@ -1,10 +1,7 @@
 package com.woniuxy.snailrestaurant.controller;
 
 import com.woniuxy.snailrestaurant.domain.Review;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,4 +24,14 @@ public class ReviewController {
     {
         return null;
     }
+
+
+    @ApiOperation(value = "添加评论")
+    @PostMapping
+    int addReview(@RequestBody @ApiParam(name = "review",value = "评论内容json请求体") Review review){
+
+        return 0;
+    }
+
+
 }
