@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 /**
 * @author LeeYuan
 * @description 针对表【login_log】的数据库操作Service实现
-* @createDate 2022-07-22 16:22:42
+* @createDate 2022-07-23 12:00:58
 */
 @Service
 public class LoginLogServiceImpl extends ServiceImpl<LoginLogMapper, LoginLog>
