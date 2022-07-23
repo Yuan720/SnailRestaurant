@@ -1,6 +1,7 @@
 package com.woniuxy.snailrestaurant.controller;
 
 import com.woniuxy.snailrestaurant.domain.DishDetial;
+import com.woniuxy.snailrestaurant.domain.Dishes;
 import io.swagger.annotations.*;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,13 +15,13 @@ public class DishesController {
     @ApiOperation(value = "返回指定商家的菜品列表")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "merchantId", value = "商家id", required = true),
-            @ApiImplicitParam(name = "offset", value = "分页起始值", required = false),
-            @ApiImplicitParam(name = "pageSize", value = "分页大小", required = false)
+            @ApiImplicitParam(name = "offset", value = "分页起始值"),
+            @ApiImplicitParam(name = "pageSize", value = "分页大小")
     })
     @GetMapping("/{merchantId}")
-    List<DishesController> getByMerchantId(@RequestParam(value = "offset", defaultValue = "0", required = false) int offset,
-                                           @RequestParam(value = "pageSize", defaultValue = "15", required = false) int pageSize,
-                                           @PathVariable("merchantId") int merchantId) {
+    List<Dishes> getByMerchantId(@RequestParam(value = "offset", defaultValue = "0", required = false) int offset,
+                                 @RequestParam(value = "pageSize", defaultValue = "15", required = false) int pageSize,
+                                 @PathVariable("merchantId") int merchantId) {
 
         return null;
     }
