@@ -18,7 +18,7 @@ public class ReviewController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id",value = "菜品id",required = true),
             @ApiImplicitParam(name = "offset",value = "分页起始值",required = false),
-            @ApiImplicitParam(name = "offset",value = "分页大小",required = false)
+            @ApiImplicitParam(name = "size",value = "分页大小",required = false)
     })
     @GetMapping("/dishes/{id}")
     List<Review> listReviewByDishesId(@PathVariable("id") int dishesId,
