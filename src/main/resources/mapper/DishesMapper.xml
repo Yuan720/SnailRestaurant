@@ -16,4 +16,5 @@
         id,merchant_id,name,
         total_sales,price
     </sql>
+
 </mapper>
