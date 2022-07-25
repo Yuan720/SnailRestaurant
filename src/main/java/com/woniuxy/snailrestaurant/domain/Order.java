@@ -1,6 +1,7 @@
 package com.woniuxy.snailrestaurant.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 import lombok.Data;
 
 /**
@@ -10,34 +11,26 @@ import lombok.Data;
 @Data
 public class Order implements Serializable {
     /**
-     * 唯一主键
+     * 第一位字母标识订单类型
+A/B/C/D
+第2-7订单日期
+220722
+
+8-13位
+时间戳后6位
+345678
+14-18
+用户id后5位
+19-20
+随机2位
+45
      */
-    private Integer id;
+    private String id;
 
     /**
-     * 订单号,可以重复,因为有可能每个订单对应多个种类商品
-     */
-    private String orderNumber;
-
-    /**
-     * 用户外键
+     * 用户id
      */
     private Integer userId;
-
-    /**
-     * 菜品外键
-     */
-    private Integer dishesId;
-
-    /**
-     * 当前商品个数
-     */
-    private Integer numbers;
-
-    /**
-     * 到店自助点单/外卖/到店人工点单
-     */
-    private Integer orderType;
 
     /**
      * 收餐信息外键
@@ -58,6 +51,51 @@ public class Order implements Serializable {
      * 支付方式
      */
     private String paymentMethod;
+
+    /**
+     * 总金额
+     */
+    private Integer totalCount;
+
+    /**
+     * 优惠券
+     */
+    private Integer couponId;
+
+    /**
+     * 商家外键
+     */
+    private Integer merchantId;
+
+    /**
+     * 备注
+     */
+    private String remark;
+
+    /**
+     * 创建时间
+     */
+    private Date createTime;
+
+    /**
+     * 支付时间
+     */
+    private Date payTime;
+
+    /**
+     * 餐具份数,默认1
+     */
+    private Integer tableware;
+
+    /**
+     * 预计送达时间
+     */
+    private Date expectedTime;
+
+    /**
+     * 订单类型,外卖堂食
+     */
+    private Integer type;
 
     private static final long serialVersionUID = 1L;
 }

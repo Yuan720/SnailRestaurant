@@ -33,7 +33,7 @@ public class Review implements Serializable {
     /**
      * 用户id, 展示时需要脱敏
      */
-    private Integer reviewerId;
+    private Integer userId;
 
     /**
      * 星级

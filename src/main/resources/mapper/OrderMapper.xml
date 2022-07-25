@@ -5,22 +5,28 @@
 <mapper namespace="com.woniuxy.snailrestaurant.mapper.OrderMapper">
 
     <resultMap id="BaseResultMap" type="com.woniuxy.snailrestaurant.domain.Order">
-            <id property="id" column="id" jdbcType="INTEGER"/>
-            <result property="orderNumber" column="order_number" jdbcType="VARCHAR"/>
+            <id property="id" column="id" jdbcType="CHAR"/>
             <result property="userId" column="user_id" jdbcType="INTEGER"/>
-            <result property="dishesId" column="dishes_id" jdbcType="INTEGER"/>
-            <result property="numbers" column="numbers" jdbcType="INTEGER"/>
-            <result property="orderType" column="order_type" jdbcType="TINYINT"/>
             <result property="deliverInfoId" column="deliver_info_id" jdbcType="INTEGER"/>
             <result property="orderStatus" column="order_status" jdbcType="TINYINT"/>
             <result property="seatId" column="seat_id" jdbcType="INTEGER"/>
             <result property="paymentMethod" column="payment_method" jdbcType="VARCHAR"/>
+            <result property="totalCount" column="total_count" jdbcType="DECIMAL"/>
+            <result property="couponId" column="coupon_id" jdbcType="INTEGER"/>
+            <result property="merchantId" column="merchant_id" jdbcType="INTEGER"/>
+            <result property="remark" column="remark" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="payTime" column="pay_time" jdbcType="TIMESTAMP"/>
+            <result property="tableware" column="tableware" jdbcType="INTEGER"/>
+            <result property="expectedTime" column="expected_time" jdbcType="TIMESTAMP"/>
+            <result property="type" column="type" jdbcType="TINYINT"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,order_number,user_id,
-        dishes_id,numbers,order_type,
-        deliver_info_id,order_status,seat_id,
-        payment_method
+        id,user_id,deliver_info_id,
+        order_status,seat_id,payment_method,
+        total_count,coupon_id,merchant_id,
+        remark,create_time,pay_time,
+        tableware,expected_time,type
     </sql>
 </mapper>

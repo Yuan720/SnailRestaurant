@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 /**
 * @author LeeYuan
 * @description 针对表【dish_detial(菜品描述页面)】的数据库操作Service实现
-* @createDate 2022-07-23 12:06:43
+* @createDate 2022-07-25 20:27:40
 */
 @Service
 public class DishDetialServiceImpl extends ServiceImpl<DishDetialMapper, DishDetial>

@@ -9,12 +9,12 @@
             <result property="dishesId" column="dishes_id" jdbcType="INTEGER"/>
             <result property="content" column="content" jdbcType="VARCHAR"/>
             <result property="reviewDate" column="review_date" jdbcType="TIMESTAMP"/>
-            <result property="reviewerId" column="reviewer_id" jdbcType="INTEGER"/>
+            <result property="userId" column="user_id" jdbcType="INTEGER"/>
             <result property="star" column="star" jdbcType="TINYINT"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id,dishes_id,content,
-        review_date,reviewer_id,star
+        review_date,user_id,star
     </sql>
 </mapper>

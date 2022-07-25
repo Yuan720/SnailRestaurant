@@ -7,7 +7,7 @@
     <resultMap id="BaseResultMap" type="com.woniuxy.snailrestaurant.domain.User">
             <id property="id" column="id" jdbcType="INTEGER"/>
             <result property="userName" column="user_name" jdbcType="VARCHAR"/>
-            <result property="hashedPasswd" column="hashed_passwd" jdbcType="VARCHAR"/>
+            <result property="hashedPasswd" column="hashed_passwd" jdbcType="CHAR"/>
             <result property="accountType" column="account_type" jdbcType="TINYINT"/>
             <result property="tel" column="tel" jdbcType="VARCHAR"/>
     </resultMap>

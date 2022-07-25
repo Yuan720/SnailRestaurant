@@ -20,7 +20,7 @@ public class User implements Serializable {
     private String userName;
 
     /**
-     * 哈希密码
+     * 哈希密码 sha256 64位十六进制字符
      */
     private String hashedPasswd;
 

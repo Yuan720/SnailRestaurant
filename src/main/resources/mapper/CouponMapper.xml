@@ -12,11 +12,17 @@
             <result property="type" column="type" jdbcType="TINYINT"/>
             <result property="discount" column="discount" jdbcType="TINYINT"/>
             <result property="dishesSetId" column="dishes_set_id" jdbcType="INTEGER"/>
+            <result property="startTime" column="start_time" jdbcType="TIMESTAMP"/>
+            <result property="endTime" column="end_time" jdbcType="TIMESTAMP"/>
+            <result property="total" column="total" jdbcType="INTEGER"/>
+            <result property="limitPer" column="limit_per" jdbcType="INTEGER"/>
+            <result property="sceneFor" column="scene_for" jdbcType="TINYINT"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id,value,minimum_pay,
         limit_merchant_id,type,discount,
-        dishes_set_id
+        dishes_set_id,start_time,end_time,
+        total,limit_per,scene_for
     </sql>
 </mapper>

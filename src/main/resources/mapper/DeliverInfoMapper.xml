@@ -11,10 +11,12 @@
             <result property="addr" column="addr" jdbcType="VARCHAR"/>
             <result property="asDefault" column="as_default" jdbcType="TINYINT"/>
             <result property="tag" column="tag" jdbcType="VARCHAR"/>
+            <result property="userId" column="user_id" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id,recipient_name,recipient_tel,
-        addr,as_default,tag
+        addr,as_default,tag,
+        user_id
     </sql>
 </mapper>

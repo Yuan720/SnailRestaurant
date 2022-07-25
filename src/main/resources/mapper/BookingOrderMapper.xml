@@ -12,11 +12,12 @@
             <result property="contactName" column="contact_name" jdbcType="VARCHAR"/>
             <result property="tel" column="tel" jdbcType="VARCHAR"/>
             <result property="remark" column="remark" jdbcType="VARCHAR"/>
+            <result property="orderStatus" column="order_status" jdbcType="TINYINT"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id,booking_date,use_time_from,
         use_time_to,contact_name,tel,
-        remark
+        remark,order_status
     </sql>
 </mapper>

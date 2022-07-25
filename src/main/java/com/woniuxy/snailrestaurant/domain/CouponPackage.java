@@ -26,16 +26,6 @@ public class CouponPackage implements Serializable {
     private Integer couponId;
 
     /**
-     * 张数
-     */
-    private Integer count;
-
-    /**
-     * 过期时间
-     */
-    private Date expireTime;
-
-    /**
      * 领取时间
      */
     private Date pickTime;

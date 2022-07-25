@@ -45,5 +45,10 @@ public class BookingOrder implements Serializable {
      */
     private String remark;
 
+    /**
+     * 订单状态
+     */
+    private Integer orderStatus;
+
     private static final long serialVersionUID = 1L;
 }
