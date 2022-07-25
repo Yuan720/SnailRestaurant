@@ -6,12 +6,15 @@ import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerIntercept
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * 这个配置是MybatisPlus的分页配置
+ */
 @Configuration
 public class MpConfig {
-    @Bean
-    public MybatisPlusInterceptor mpIntercepotor(){
-        MybatisPlusInterceptor mpInterceptor = new MybatisPlusInterceptor();
-        mpInterceptor.addInnerInterceptor(new PaginationInnerInterceptor());
-        return mpInterceptor;
-    }
+//    @Bean
+//    public MybatisPlusInterceptor mpIntercepotor(){
+//        MybatisPlusInterceptor mpInterceptor = new MybatisPlusInterceptor();
+//        mpInterceptor.addInnerInterceptor(new PaginationInnerInterceptor());
+//        return mpInterceptor;
+//    }
 }
