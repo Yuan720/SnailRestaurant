@@ -1,8 +1,14 @@
 package com.woniuxy.snailrestaurant.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.woniuxy.snailrestaurant.common.Sha256;
 import com.woniuxy.snailrestaurant.domain.User;
+import com.woniuxy.snailrestaurant.service.UserService;
 import io.swagger.annotations.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/user")
