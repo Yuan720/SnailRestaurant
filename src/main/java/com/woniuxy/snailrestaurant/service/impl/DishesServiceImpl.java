@@ -6,6 +6,8 @@ import com.woniuxy.snailrestaurant.service.DishesService;
 import com.woniuxy.snailrestaurant.mapper.DishesMapper;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
 /**
 * @author LeeYuan
 * @description 针对表【dishes】的数据库操作Service实现

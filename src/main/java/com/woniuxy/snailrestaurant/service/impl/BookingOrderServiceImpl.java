@@ -6,6 +6,8 @@ import com.woniuxy.snailrestaurant.service.BookingOrderService;
 import com.woniuxy.snailrestaurant.mapper.BookingOrderMapper;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
 /**
 * @author LeeYuan
 * @description 针对表【booking_order(预定)】的数据库操作Service实现
@@ -14,6 +16,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class BookingOrderServiceImpl extends ServiceImpl<BookingOrderMapper, BookingOrder>
     implements BookingOrderService{
+
+
 
 }
 

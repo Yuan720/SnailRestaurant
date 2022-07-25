@@ -4,7 +4,7 @@ import java.io.Serializable;
 import lombok.Data;
 
 /**
- * 
+ *
  * @TableName deliver_info
  */
 @Data
@@ -40,7 +40,7 @@ public class DeliverInfo implements Serializable {
     private String tag;
 
     /**
-     * 用户外键
+     * 用户ID（外键）
      */
     private Integer userId;
 
