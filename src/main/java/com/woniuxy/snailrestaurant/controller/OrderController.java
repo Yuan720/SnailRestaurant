@@ -15,11 +15,20 @@ import java.util.List;
 @RequestMapping("/order")
 public class OrderController {
 
-    @ApiOperation(value = "点餐,支持线上点餐,到店点餐,服务员人工点餐")
-    @PostMapping
-    int submitOnlineOrder(@RequestBody @ApiParam(name = "dto",value = "订单信息封装") OrderDTO dto) {
+    @ApiOperation(value = "创建订单此处未支付,支持线上点餐,到店点餐,服务员人工点餐,返回订单号")
+    @PostMapping("/create")
+    String creatOrder(@RequestBody @ApiParam(name = "dto",value = "订单信息封装") OrderDTO dto) {
+        return null;
+    }
+
+
+    @ApiOperation(value = "订单支付款")
+    @PostMapping("/pay")
+    int creatOrder(String orderNum) {
         return 0;
     }
+
+
 
     @ApiOperation(value = "获取订单信息")
     @GetMapping("/{orderNumber}")

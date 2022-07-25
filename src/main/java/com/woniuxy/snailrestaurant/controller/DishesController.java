@@ -1,8 +1,5 @@
 package com.woniuxy.snailrestaurant.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.woniuxy.snailrestaurant.domain.DishDetial;
 import com.woniuxy.snailrestaurant.domain.Dishes;
 import com.woniuxy.snailrestaurant.service.DishesService;
@@ -32,6 +29,7 @@ public class DishesController {
         IPage iPage = ds.page(page, lqw);
         return iPage;
 
+        return null;
     }
 
 
