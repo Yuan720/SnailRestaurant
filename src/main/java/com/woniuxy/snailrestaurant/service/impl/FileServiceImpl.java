@@ -1,9 +1,6 @@
 package com.woniuxy.snailrestaurant.service.impl;
 
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.gridfs.GridFSBucket;
-import com.mongodb.client.gridfs.GridFSBuckets;
 import com.mongodb.client.gridfs.model.GridFSFile;
 import com.woniuxy.snailrestaurant.service.FileService;
 import org.bson.types.ObjectId;
@@ -12,13 +9,17 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.gridfs.GridFsResource;
 import org.springframework.data.mongodb.gridfs.GridFsTemplate;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
+import org.springframework.util.MimeTypeUtils;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
+import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
+import java.util.Objects;
 
 @Component
 public class FileServiceImpl implements FileService {
@@ -26,7 +27,6 @@ public class FileServiceImpl implements FileService {
     GridFsTemplate gridFsTemplate;
     @Autowired
     GridFSBucket bucket;
-
 
 
     @Override
@@ -37,7 +37,7 @@ public class FileServiceImpl implements FileService {
 
 
     @Override
-    public void downLoad (HttpServletResponse response, String fileKey) {
+    public void downLoad(HttpServletResponse response, String fileKey) {
         GridFSFile gfs = gridFsTemplate.findOne(Query.query(Criteria.where("_id").is(fileKey)));
         String filename = gfs.getFilename();
         GridFsResource resource = gridFsTemplate.getResource(gfs);
@@ -45,9 +45,50 @@ public class FileServiceImpl implements FileService {
 
         response.setContentType(contentType);
         try {
-            bucket.downloadToStream(filename,response.getOutputStream());
+            bucket.downloadToStream(filename, response.getOutputStream());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public String saveFile(MultipartFile file) {
+        if (file.isEmpty()) {
+            return "empty file";
+        }
+        String fname = file.getOriginalFilename();
+        String extension = StringUtils.getFilenameExtension(fname).toLowerCase();
+        String contentType = null;
+        switch (extension) {
+            case "jpg":
+                contentType = MimeTypeUtils.IMAGE_JPEG_VALUE;
+                break;
+            case "jpeg":
+                contentType = MimeTypeUtils.IMAGE_JPEG_VALUE;
+                break;
+            case "png":
+                contentType = MimeTypeUtils.IMAGE_PNG_VALUE;
+                break;
+            case "gif":
+                contentType = MimeTypeUtils.IMAGE_GIF_VALUE;
+                break;
+            case "pdf":
+                contentType= MediaType.APPLICATION_PDF_VALUE;
+                break;
+            default:
+                break;
+
+        }
+    if (Objects.isNull(extension)){
+        throw new RuntimeException("mimetype not suport");
+    }
+        InputStream inputStream = null;
+        try {
+            inputStream = file.getInputStream();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        String key = uploadFile(inputStream, fname, contentType);
+        return key;
     }
 }
