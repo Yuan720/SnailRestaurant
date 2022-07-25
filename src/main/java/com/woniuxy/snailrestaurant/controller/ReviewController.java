@@ -1,9 +1,15 @@
 package com.woniuxy.snailrestaurant.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.woniuxy.snailrestaurant.domain.Dishes;
 import com.woniuxy.snailrestaurant.domain.Review;
+import com.woniuxy.snailrestaurant.service.ReviewService;
 import io.swagger.annotations.*;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Api(tags = "评论")
@@ -11,6 +17,8 @@ import java.util.List;
 @RequestMapping("/review")
 public class ReviewController {
 
+    @Resource
+    private ReviewService review;
     @ApiOperation(value = "根据菜品id查询评论")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id",value = "菜品id",required = true),
@@ -18,11 +26,15 @@ public class ReviewController {
             @ApiImplicitParam(name = "size",value = "分页大小",required = false)
     })
     @GetMapping("/dishes/{id}")
-    List<Review> listReviewByDishesId(@PathVariable("id") int dishesId,
+    IPage listReviewByDishesId(@PathVariable("id") int dishesId,
                                       @RequestParam(value = "offset", defaultValue = "0", required = false) int offSet,
                                       @RequestParam(value = "size", defaultValue = "20", required = false) int pageSize)
     {
-        return null;
+        IPage page = new Page(offSet,pageSize);
+        LambdaQueryWrapper<Review> lqw = new LambdaQueryWrapper<Review>();
+        lqw.eq(Review::getDishesId,dishesId);
+        IPage iPage = review.page(page,lqw);
+        return iPage;
     }
 
 

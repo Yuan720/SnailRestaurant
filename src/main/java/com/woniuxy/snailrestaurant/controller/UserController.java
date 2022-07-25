@@ -15,11 +15,12 @@ public class UserController {
     })
     @PostMapping("/login")
     String login(@RequestBody UserController user) {
+
         return null;
     }
 
     @ApiOperation(value = "更新用户信息")
-    @PutMapping
+    @PutMapping("/update")
     int updateUser(@RequestBody @ApiParam(name ="user",value = "用户信息") User user) {
         return 0;
     }

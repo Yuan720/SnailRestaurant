@@ -39,5 +39,10 @@ public class DeliverInfo implements Serializable {
      */
     private String tag;
 
+    /**
+     * 用户ID（外键）
+     */
+    private Integer userId;
+
     private static final long serialVersionUID = 1L;
 }
