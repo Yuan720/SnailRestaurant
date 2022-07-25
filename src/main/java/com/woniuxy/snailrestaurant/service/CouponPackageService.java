@@ -1,7 +1,12 @@
 package com.woniuxy.snailrestaurant.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.woniuxy.snailrestaurant.domain.CouponPackage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.PutMapping;
+
+import java.sql.Wrapper;
 
 /**
 * @author LeeYuan
@@ -9,5 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2022-07-23 12:06:43
 */
 public interface CouponPackageService extends IService<CouponPackage> {
-
+    IPage<CouponPackage> findByUserId(int offset,int pageSize,int userId,int status);
 }

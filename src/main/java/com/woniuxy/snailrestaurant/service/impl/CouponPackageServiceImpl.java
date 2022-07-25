@@ -1,10 +1,15 @@
 package com.woniuxy.snailrestaurant.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.woniuxy.snailrestaurant.domain.CouponPackage;
 import com.woniuxy.snailrestaurant.service.CouponPackageService;
 import com.woniuxy.snailrestaurant.mapper.CouponPackageMapper;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
 * @author LeeYuan
@@ -15,6 +20,18 @@ import org.springframework.stereotype.Service;
 public class CouponPackageServiceImpl extends ServiceImpl<CouponPackageMapper, CouponPackage>
     implements CouponPackageService{
 
+    @Resource
+    private CouponPackageMapper couponPackageMapper;
+
+    @Override
+    public IPage<CouponPackage> findByUserId(int offset, int pageSize, int userId, int status) {
+        IPage page = new Page(offset,pageSize);
+        QueryWrapper<CouponPackage> qw = new QueryWrapper<CouponPackage>();
+        qw.eq("user_id",userId);
+        qw.eq("status",status);
+        IPage iPage = couponPackageMapper.findPage(page,qw);
+        return iPage;
+    }
 }
 
 

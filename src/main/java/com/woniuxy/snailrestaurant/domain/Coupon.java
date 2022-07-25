@@ -2,6 +2,9 @@ package com.woniuxy.snailrestaurant.domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 /**
@@ -44,6 +47,31 @@ public class Coupon implements Serializable {
      * 折扣集
      */
     private Integer dishesSetId;
+
+    /**
+     * 优惠券起始时间
+     */
+    private Date startTime;
+
+    /**
+     * 优惠券过期时间
+     */
+    private Date endTime;
+
+    /**
+     *发放总量
+     */
+    private Integer total;
+
+    /**
+     *每人限领数量
+     */
+    private Integer limitPer;
+
+    /**
+     * 应用场景（1、仅限堂食可用；2、仅限外卖可用；3、堂食外卖均可）
+     */
+    private Integer sceneFor;
 
     private static final long serialVersionUID = 1L;
 }

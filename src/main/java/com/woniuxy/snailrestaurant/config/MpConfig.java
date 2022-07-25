@@ -11,10 +11,10 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class MpConfig {
-//    @Bean
-//    public MybatisPlusInterceptor mpIntercepotor(){
-//        MybatisPlusInterceptor mpInterceptor = new MybatisPlusInterceptor();
-//        mpInterceptor.addInnerInterceptor(new PaginationInnerInterceptor());
-//        return mpInterceptor;
-//    }
+    @Bean
+    public MybatisPlusInterceptor mpIntercepotor(){
+        MybatisPlusInterceptor mpInterceptor = new MybatisPlusInterceptor();
+        mpInterceptor.addInnerInterceptor(new PaginationInnerInterceptor());
+        return mpInterceptor;
+    }
 }
