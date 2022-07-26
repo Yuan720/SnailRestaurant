@@ -3,6 +3,8 @@ package com.woniuxy.snailrestaurant.controller;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.woniuxy.snailrestaurant.common.CommonResultCode;
+import com.woniuxy.snailrestaurant.common.CustomResponse;
 import com.woniuxy.snailrestaurant.common.Sha256;
 import com.woniuxy.snailrestaurant.domain.User;
 import com.woniuxy.snailrestaurant.service.UserService;
@@ -27,7 +29,8 @@ public class UserController {
             @ApiImplicitParam(name = "user", value = "用户账号,密码,json封装", required = true)
     })
     @PostMapping("/login")
-    String login(@RequestBody User user) {
+    CustomResponse login(@RequestBody User user) {
+        CustomResponse customResponse = new CustomResponse();
         QueryWrapper<User> wrapper = new QueryWrapper<>();
         String passwd = Sha256.encrypt(user.getHashedPasswd());
         wrapper.eq("user_name", user.getUserName()).and(w -> {
@@ -40,10 +43,13 @@ public class UserController {
             Algorithm alg = Algorithm.HMAC256(secretKey);
             sign = JWT.create().withClaim("userName", find.getUserName())
                     .withIssuedAt(new Date()).withExpiresAt(new Date(t)).sign(alg);
+            customResponse.setCode(CommonResultCode.SUCCESS.getCode()).setData(sign).setMsg(CommonResultCode.SUCCESS.getMsg());
         } else {
             sign = "wrong passwd or account not exeist";
+            customResponse.setMsg(sign).setCode(CommonResultCode.NO_USER_EXIST_RO_INCORRECT_CREDENTIAL.getCode());
         }
-        return sign;
+
+        return customResponse;
     }
 
     @ApiOperation(value = "用户注册接口")
