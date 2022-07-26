@@ -23,8 +23,6 @@ import javax.servlet.http.HttpServletRequest;
 
 @RestControllerAdvice(basePackages = "com.woniuxy.snailrestaurant.controller")
 public class PostResponseAdvice implements ResponseBodyAdvice<Object> {
-    @Autowired
-    ObjectMapper objectMapper;
     @Override
     public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
         System.out.println(returnType.getMethod().getName());
