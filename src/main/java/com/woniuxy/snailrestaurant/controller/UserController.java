@@ -20,10 +20,8 @@ import java.util.Objects;
 public class UserController {
     @Autowired
     UserService service;
-
     @Value("${jwt.secretkey}")
     String secretKey;
-
     @ApiOperation(value = "用户登录,返回jwt令牌")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "user", value = "用户账号,密码,json封装", required = true)
@@ -53,8 +51,6 @@ public class UserController {
     boolean register(@RequestBody User user) {
         String userName = user.getUserName();
         String passwd = user.getHashedPasswd();
-        Integer accountType = user.getAccountType();
-        assert accountType != null;
         assert passwd != null;
         assert userName != null;
         user.setHashedPasswd(Sha256.encrypt(passwd));
