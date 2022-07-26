@@ -43,10 +43,10 @@ public class UserController {
             Algorithm alg = Algorithm.HMAC256(secretKey);
             sign = JWT.create().withClaim("userName", find.getUserName())
                     .withIssuedAt(new Date()).withExpiresAt(new Date(t)).sign(alg);
-            customResponse.setCode(CommonResultCode.SUCCESS.getCode()).setData(sign).setMsg(CommonResultCode.SUCCESS.getMsg());
+            customResponse.setCode(CommonResultCode.SUCCESS.getCode()).setData(sign).setMessage(CommonResultCode.SUCCESS.getMsg());
         } else {
             sign = "wrong passwd or account not exeist";
-            customResponse.setMsg(sign).setCode(CommonResultCode.NO_USER_EXIST_RO_INCORRECT_CREDENTIAL.getCode());
+            customResponse.setMessage(sign).setCode(CommonResultCode.NO_USER_EXIST_RO_INCORRECT_CREDENTIAL.getCode());
         }
 
         return customResponse;

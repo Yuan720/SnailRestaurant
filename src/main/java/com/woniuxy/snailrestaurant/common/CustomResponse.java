@@ -7,6 +7,6 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class CustomResponse {
     int code;
-    String msg;
+    String message;
     String data;
 }
