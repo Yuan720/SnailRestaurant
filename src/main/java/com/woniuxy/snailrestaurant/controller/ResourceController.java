@@ -1,21 +1,17 @@
 package com.woniuxy.snailrestaurant.controller;
 
 import com.woniuxy.snailrestaurant.service.FileService;
+import io.swagger.annotations.Api;
 import lombok.extern.java.Log;
-import nonapi.io.github.classgraph.utils.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.MimeTypeUtils;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.logging.Level;
 
+@Api(tags = "文件系统")
 @Log
 @Controller
 @RequestMapping("/resource")

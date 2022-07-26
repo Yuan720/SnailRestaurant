@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.woniuxy.snailrestaurant.mapper.ExpendFlowMapper">
+
+    <resultMap id="BaseResultMap" type="com.woniuxy.snailrestaurant.domain.ExpendFlow">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="merchantId" column="merchant_id" jdbcType="INTEGER"/>
+            <result property="merchantName" column="merchant_name" jdbcType="VARCHAR"/>
+            <result property="payType" column="pay_type" jdbcType="TINYINT"/>
+            <result property="moneyAmount" column="money_amount" jdbcType="DECIMAL"/>
+            <result property="transactionTime" column="transaction_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,merchant_id,merchant_name,
+        pay_type,money_amount,transaction_time
+    </sql>
+</mapper>
