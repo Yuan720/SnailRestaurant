@@ -1,35 +1,51 @@
 package com.woniuxy.snailrestaurant.controller;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.woniuxy.snailrestaurant.common.Sha256;
 import com.woniuxy.snailrestaurant.domain.User;
 import com.woniuxy.snailrestaurant.service.UserService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.Objects;
 
+@Api(tags = "用户")
 @RestController
 @RequestMapping("/user")
-@Api(tags = "用户")
 public class UserController {
     @Autowired
     UserService service;
+
+    @Value("${jwt.secretkey}")
+    String secretKey;
+
     @ApiOperation(value = "用户登录,返回jwt令牌")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "user", value = "用户账号,密码,json封装", required = true)
     })
     @PostMapping("/login")
     String login(@RequestBody User user) {
-        QueryWrapper<User> wrapper=new QueryWrapper<>();
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
         String passwd = Sha256.encrypt(user.getHashedPasswd());
-        wrapper.eq("user_name",user.getUserName()).and(w->{w.eq("hashed_passwd",passwd);});
+        wrapper.eq("user_name", user.getUserName()).and(w -> {
+            w.eq("hashed_passwd", passwd);
+        });
         User find = service.getOne(wrapper);
-        if (Objects.nonNull(find)){
-
+        String sign;
+        if (Objects.nonNull(find)) {
+            long t = System.currentTimeMillis() + 1000 * 60 * 60 * 24 * 3;
+            Algorithm alg = Algorithm.HMAC256(secretKey);
+            sign = JWT.create().withClaim("userName", find.getUserName())
+                    .withIssuedAt(new Date()).withExpiresAt(new Date(t)).sign(alg);
+        } else {
+            sign = "wrong passwd or account not exeist";
         }
-        return null;
+        return sign;
     }
 
     @ApiOperation(value = "用户注册接口")
@@ -38,16 +54,16 @@ public class UserController {
         String userName = user.getUserName();
         String passwd = user.getHashedPasswd();
         Integer accountType = user.getAccountType();
-        assert  accountType!=null;
-        assert passwd!=null;
-        assert userName!=null;
+        assert accountType != null;
+        assert passwd != null;
+        assert userName != null;
         user.setHashedPasswd(Sha256.encrypt(passwd));
-      return   service.save(user);
+        return service.save(user);
     }
 
     @ApiOperation(value = "更新用户信息")
     @PutMapping
-    int updateUser(@RequestBody @ApiParam(name ="user",value = "用户信息") User user) {
+    int updateUser(@RequestBody @ApiParam(name = "user", value = "用户信息") User user) {
         return 0;
     }
 
