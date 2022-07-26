@@ -2,10 +2,12 @@ package com.woniuxy.snailrestaurant.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+
 import lombok.Data;
 
 /**
  * 卡包
+ *
  * @TableName coupon_package
  */
 @Data
@@ -23,6 +25,7 @@ public class CouponPackage implements Serializable {
     /**
      * 优惠券id
      */
+
     private Integer couponId;
 
     /**
