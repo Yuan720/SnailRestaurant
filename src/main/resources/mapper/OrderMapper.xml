@@ -20,6 +20,7 @@
             <result property="tableware" column="tableware" jdbcType="INTEGER"/>
             <result property="expectedTime" column="expected_time" jdbcType="TIMESTAMP"/>
             <result property="type" column="type" jdbcType="TINYINT"/>
+            <result property="prepareStatus" column="prepare_status" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -27,6 +28,7 @@
         order_status,seat_id,payment_method,
         total_count,coupon_id,merchant_id,
         remark,create_time,pay_time,
-        tableware,expected_time,type
+        tableware,expected_time,type,
+        prepare_status
     </sql>
 </mapper>

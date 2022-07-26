@@ -8,9 +8,12 @@
             <id property="id" column="id" jdbcType="INTEGER"/>
             <result property="userId" column="user_id" jdbcType="INTEGER"/>
             <result property="balance" column="balance" jdbcType="DECIMAL"/>
+            <result property="merchantId" column="merchant_id" jdbcType="INTEGER"/>
+            <result property="level" column="level" jdbcType="TINYINT"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,user_id,balance
+        id,user_id,balance,
+        merchant_id,level
     </sql>
 </mapper>

@@ -16,6 +16,11 @@ public class BookingOrder implements Serializable {
     private Integer id;
 
     /**
+     * 用户外键
+     */
+    private Integer userId;
+
+    /**
      * 预定日期
      */
     private Date bookingDate;
@@ -49,6 +54,11 @@ public class BookingOrder implements Serializable {
      * 订单状态
      */
     private Integer orderStatus;
+
+    /**
+     * 支付方式 枚举
+     */
+    private Integer paymentMethod;
 
     private static final long serialVersionUID = 1L;
 }

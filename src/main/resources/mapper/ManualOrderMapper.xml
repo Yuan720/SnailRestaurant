@@ -8,9 +8,11 @@
             <id property="id" column="id" jdbcType="INTEGER"/>
             <result property="machineId" column="machine_id" jdbcType="VARCHAR"/>
             <result property="operator" column="operator" jdbcType="VARCHAR"/>
+            <result property="orderId" column="order_id" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,machine_id,operator
+        id,machine_id,operator,
+        order_id
     </sql>
 </mapper>

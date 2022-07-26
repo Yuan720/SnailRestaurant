@@ -25,5 +25,15 @@ public class MemberCard implements Serializable {
      */
     private BigDecimal balance;
 
+    /**
+     * 门店外键,可能关联办卡门店
+     */
+    private Integer merchantId;
+
+    /**
+     * 会员等级
+     */
+    private Integer level;
+
     private static final long serialVersionUID = 1L;
 }

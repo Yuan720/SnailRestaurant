@@ -6,6 +6,7 @@
 
     <resultMap id="BaseResultMap" type="com.woniuxy.snailrestaurant.domain.BookingOrder">
             <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="userId" column="user_id" jdbcType="INTEGER"/>
             <result property="bookingDate" column="booking_date" jdbcType="DATE"/>
             <result property="useTimeFrom" column="use_time_from" jdbcType="TIMESTAMP"/>
             <result property="useTimeTo" column="use_time_to" jdbcType="TIMESTAMP"/>
@@ -13,11 +14,13 @@
             <result property="tel" column="tel" jdbcType="VARCHAR"/>
             <result property="remark" column="remark" jdbcType="VARCHAR"/>
             <result property="orderStatus" column="order_status" jdbcType="TINYINT"/>
+            <result property="paymentMethod" column="payment_method" jdbcType="TINYINT"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,booking_date,use_time_from,
-        use_time_to,contact_name,tel,
-        remark,order_status
+        id,user_id,booking_date,
+        use_time_from,use_time_to,contact_name,
+        tel,remark,order_status,
+        payment_method
     </sql>
 </mapper>

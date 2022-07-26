@@ -38,7 +38,7 @@ A/B/C/D
     private Integer deliverInfoId;
 
     /**
-     * 订单状态,已完成/准备中/未支付/已支付/用餐中/已制作
+     * 订单状态,已完成/未支付/带收取/已取消/待评价
      */
     private Integer orderStatus;
 
@@ -96,6 +96,12 @@ A/B/C/D
      * 订单类型,外卖堂食
      */
     private Integer type;
+
+    /**
+     * 制作状态,员工端查看
+待制作,准备中,已制作
+     */
+    private String prepareStatus;
 
     private static final long serialVersionUID = 1L;
 }

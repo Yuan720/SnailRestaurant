@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 
 /**
 * @author LeeYuan
-* @description 针对表【manual_order】的数据库操作Service实现
-* @createDate 2022-07-25 20:27:40
+* @description 针对表【manual_order(人工点单生成的订单记录)】的数据库操作Service实现
+* @createDate 2022-07-26 18:58:18
 */
 @Service
 public class ManualOrderServiceImpl extends ServiceImpl<ManualOrderMapper, ManualOrder>
