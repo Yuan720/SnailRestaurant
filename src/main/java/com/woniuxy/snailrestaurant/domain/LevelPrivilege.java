@@ -17,7 +17,7 @@ public class LevelPrivilege implements Serializable {
     /**
      * 会员等级
      */
-    private String level;
+    private Integer level;
 
     /**
      * 折扣值

@@ -6,7 +6,7 @@
 
     <resultMap id="BaseResultMap" type="com.woniuxy.snailrestaurant.domain.LevelPrivilege">
             <id property="id" column="id" jdbcType="INTEGER"/>
-            <result property="level" column="level" jdbcType="VARCHAR"/>
+            <result property="level" column="level" jdbcType="TINYINT"/>
             <result property="discount" column="discount" jdbcType="DECIMAL"/>
             <result property="giftValue" column="gift_value" jdbcType="DECIMAL"/>
             <result property="threshold" column="threshold" jdbcType="INTEGER"/>

@@ -27,7 +27,7 @@ public class ManualOrder implements Serializable {
     /**
      * 订单外键
      */
-    private Integer orderId;
+    private String orderId;
 
     private static final long serialVersionUID = 1L;
 }

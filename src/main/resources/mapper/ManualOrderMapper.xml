@@ -8,7 +8,7 @@
             <id property="id" column="id" jdbcType="INTEGER"/>
             <result property="machineId" column="machine_id" jdbcType="VARCHAR"/>
             <result property="operator" column="operator" jdbcType="VARCHAR"/>
-            <result property="orderId" column="order_id" jdbcType="INTEGER"/>
+            <result property="orderId" column="order_id" jdbcType="CHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
