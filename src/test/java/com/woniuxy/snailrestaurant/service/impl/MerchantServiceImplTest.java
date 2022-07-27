@@ -1,9 +1,15 @@
 package com.woniuxy.snailrestaurant.service.impl;
 
+import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.woniuxy.snailrestaurant.domain.Dishes;
 import com.woniuxy.snailrestaurant.domain.Merchant;
+import com.woniuxy.snailrestaurant.domain.User;
+import com.woniuxy.snailrestaurant.domain.dto.Images;
 import com.woniuxy.snailrestaurant.domain.vo.NearMerchantVo;
+import com.woniuxy.snailrestaurant.service.DishesService;
 import com.woniuxy.snailrestaurant.service.MerchantService;
+import com.woniuxy.snailrestaurant.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +24,13 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class MerchantServiceImplTest {
 @Autowired
-    MerchantService service;
+    DishesService service;
+@Autowired
+    UserService userService;
     @Test
     void getNearMerchant() {
-        Page<NearMerchantVo> merchantPage = new Page<>(1, 3);
-        List<NearMerchantVo> nearMerchant = service.getNearMerchant(merchantPage, "point(113.941819 22.528443)");
+        Dishes byId = service.getById(1);
+
         System.out.println();
     }
 }

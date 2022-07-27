@@ -20,13 +20,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .allowCredentials(true);
     }
 
-//    @Override
-//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
 //
-//        /** swagger配置 */
-//        registry.addResourceHandler("/swagger-ui/**")
-//                .addResourceLocations("classpath:/META-INF/resources/webjars/springfox-swagger-ui/");
-//        WebMvcConfigurer.super.addResourceHandlers(registry);
-//
-//    }
+
+
 }

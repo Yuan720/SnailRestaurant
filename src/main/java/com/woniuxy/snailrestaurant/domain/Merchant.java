@@ -1,6 +1,10 @@
 package com.woniuxy.snailrestaurant.domain;
 
 import java.io.Serializable;
+
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
+import com.woniuxy.snailrestaurant.domain.dto.Images;
 import lombok.Data;
 
 /**
@@ -20,7 +24,7 @@ public class Merchant implements Serializable {
     private String name;
 
     /**
-     * 代表餐厅的位置 WTK 坐标系统
+     * 代表餐厅的位置
      */
     private String location;
 
@@ -28,6 +32,12 @@ public class Merchant implements Serializable {
      * 状态:开业/关闭
      */
     private String status;
+
+    /**
+     *
+     */
+    @TableField(typeHandler = JacksonTypeHandler.class)
+    private Images images;
 
     private static final long serialVersionUID = 1L;
 }
