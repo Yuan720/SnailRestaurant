@@ -3,9 +3,8 @@ package com.woniuxy.snailrestaurant.controller;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.woniuxy.snailrestaurant.common.CommonResultCode;
-import com.woniuxy.snailrestaurant.common.CustomResponse;
-import com.woniuxy.snailrestaurant.common.Sha256;
+import com.sun.xml.internal.fastinfoset.algorithm.BuiltInEncodingAlgorithmFactory;
+import com.woniuxy.snailrestaurant.common.*;
 import com.woniuxy.snailrestaurant.domain.User;
 import com.woniuxy.snailrestaurant.service.UserService;
 import io.swagger.annotations.*;
@@ -41,7 +40,9 @@ public class UserController {
         if (Objects.nonNull(find)) {
             long t = System.currentTimeMillis() + 1000 * 60 * 60 * 24 * 3;
             Algorithm alg = Algorithm.HMAC256(secretKey);
-            sign = JWT.create().withClaim("userName", find.getUserName())
+            sign = JWT.create()
+                    .withClaim("userName", find.getUserName())
+                    .withClaim("id",find.getId())
                     .withIssuedAt(new Date()).withExpiresAt(new Date(t)).sign(alg);
             customResponse.setCode(CommonResultCode.SUCCESS.getCode()).setData(sign).setMessage(CommonResultCode.SUCCESS.getMsg());
         } else {
@@ -68,6 +69,5 @@ public class UserController {
     int updateUser(@RequestBody @ApiParam(name = "user", value = "用户信息") User user) {
         return 0;
     }
-
 
 }
