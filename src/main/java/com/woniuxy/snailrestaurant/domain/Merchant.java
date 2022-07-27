@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 public class Merchant implements Serializable {
     /**
-     * 
+     *
      */
     private Integer id;
 
@@ -20,9 +20,9 @@ public class Merchant implements Serializable {
     private String name;
 
     /**
-     * 代表餐厅的位置
+     * 代表餐厅的位置 WTK 坐标系统
      */
-    private Object location;
+    private String location;
 
     /**
      * 状态:开业/关闭

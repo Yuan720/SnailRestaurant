@@ -7,12 +7,21 @@
     <resultMap id="BaseResultMap" type="com.woniuxy.snailrestaurant.domain.Merchant">
             <id property="id" column="id" jdbcType="INTEGER"/>
             <result property="name" column="name" jdbcType="VARCHAR"/>
-            <result property="location" column="location" jdbcType="OTHER"/>
+            <result property="location" column="location" jdbcType="VARCHAR"/>
             <result property="status" column="status" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,name,location,
+        id,name,ST_AsText(location) as location,
         status
     </sql>
+
+
+    <select id="getNear" resultMap="near">
+        select <include refid="Base_Column_List"></include> ,ST_Distance_Sphere(st_geomfromtext(#{query}),location) distance from merchant
+                order by distance
+    </select>
+    <resultMap id="near" type="com.woniuxy.snailrestaurant.domain.vo.NearMerchantVo" autoMapping="true">
+        <association property="merchant" resultMap="BaseResultMap"></association>
+    </resultMap>
 </mapper>
