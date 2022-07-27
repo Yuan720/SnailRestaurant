@@ -2,6 +2,7 @@ package com.woniuxy.snailrestaurant.service.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.woniuxy.snailrestaurant.domain.Merchant;
+import com.woniuxy.snailrestaurant.domain.vo.NearMerchantVo;
 import com.woniuxy.snailrestaurant.service.MerchantService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -20,8 +21,8 @@ class MerchantServiceImplTest {
     MerchantService service;
     @Test
     void getNearMerchant() {
-        Page<Merchant> merchantPage = new Page<>(1, 3);
-        List<Merchant> nearMerchant = service.getNearMerchant(merchantPage, "point(113.941819 22.528443)");
+        Page<NearMerchantVo> merchantPage = new Page<>(1, 3);
+        List<NearMerchantVo> nearMerchant = service.getNearMerchant(merchantPage, "point(113.941819 22.528443)");
         System.out.println();
     }
 }

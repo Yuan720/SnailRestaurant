@@ -3,6 +3,7 @@ package com.woniuxy.snailrestaurant.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.woniuxy.snailrestaurant.domain.Merchant;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.woniuxy.snailrestaurant.domain.vo.NearMerchantVo;
 
 import java.util.List;
 
@@ -12,6 +13,6 @@ import java.util.List;
 * @createDate 2022-07-27 10:27:57
 */
 public interface MerchantService extends IService<Merchant> {
-    List<Merchant> getNearMerchant(Page page, String query);
+    List<NearMerchantVo> getNearMerchant(Page page, String query);
 
 }

@@ -3,6 +3,7 @@ package com.woniuxy.snailrestaurant.mapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.woniuxy.snailrestaurant.domain.Merchant;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.woniuxy.snailrestaurant.domain.vo.NearMerchantVo;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
 * @Entity com.woniuxy.snailrestaurant.domain.Merchant
 */
 public interface MerchantMapper extends BaseMapper<Merchant> {
- List<Merchant> getNear(Page page, String query) ;
+ List<NearMerchantVo> getNear(Page page, String query) ;
 }
 
 

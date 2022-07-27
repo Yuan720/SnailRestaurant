@@ -16,8 +16,12 @@
         status
     </sql>
 
-    <select id="getNear" resultMap="BaseResultMap">
-        select <include refid="Base_Column_List"></include> from merchant
-                order by ST_Distance_Sphere(st_geomfromtext(#{query}),location)
+
+    <select id="getNear" resultMap="near">
+        select <include refid="Base_Column_List"></include> ,ST_Distance_Sphere(st_geomfromtext(#{query}),location) distance from merchant
+                order by distance
     </select>
+    <resultMap id="near" type="com.woniuxy.snailrestaurant.domain.vo.NearMerchantVo" autoMapping="true">
+        <association property="merchant" resultMap="BaseResultMap"></association>
+    </resultMap>
 </mapper>

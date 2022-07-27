@@ -3,6 +3,7 @@ package com.woniuxy.snailrestaurant.service.impl;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.woniuxy.snailrestaurant.domain.Merchant;
+import com.woniuxy.snailrestaurant.domain.vo.NearMerchantVo;
 import com.woniuxy.snailrestaurant.service.MerchantService;
 import com.woniuxy.snailrestaurant.mapper.MerchantMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class MerchantServiceImpl extends ServiceImpl<MerchantMapper, Merchant>
     MerchantMapper mapper;
 
     @Override
-    public List<Merchant> getNearMerchant(Page page, String query) {
+    public List<NearMerchantVo> getNearMerchant(Page page, String query) {
         return mapper.getNear(page,query);
     }
 }
