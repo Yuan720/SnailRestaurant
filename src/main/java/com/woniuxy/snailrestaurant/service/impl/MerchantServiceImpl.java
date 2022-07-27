@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 /**
 * @author LeeYuan
 * @description 针对表【merchant(商家,餐厅表)】的数据库操作Service实现
-* @createDate 2022-07-25 20:27:40
+* @createDate 2022-07-27 10:27:57
 */
 @Service
 public class MerchantServiceImpl extends ServiceImpl<MerchantMapper, Merchant>

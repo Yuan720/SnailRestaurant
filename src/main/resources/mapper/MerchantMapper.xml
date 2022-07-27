@@ -12,7 +12,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,name,location,
+        id,name,ST_AsText(location),
         status
     </sql>
 </mapper>
