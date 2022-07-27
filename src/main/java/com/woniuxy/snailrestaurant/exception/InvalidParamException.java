@@ -6,10 +6,9 @@ import lombok.Getter;
 /*
 * 参数无效异常
 * */
-public class InvalidParamException extends RuntimeException{
+public class InvalidParamException extends BusinessException{
 
-    @Getter
-    int code;
+
 
     /**
      * Constructs a new runtime exception with {@code null} as its
@@ -17,8 +16,6 @@ public class InvalidParamException extends RuntimeException{
      * initialized by a call to {@link #initCause}.
      */
     public InvalidParamException() {
-        super(CommonResultCode.INVALID_PARAM.getMsg());
-        this.code=CommonResultCode.INVALID_PARAM.getCode();
-
+        super(CommonResultCode.INVALID_PARAM);
     }
 }

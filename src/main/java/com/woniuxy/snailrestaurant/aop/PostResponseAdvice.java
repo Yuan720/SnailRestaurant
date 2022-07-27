@@ -37,13 +37,7 @@ public class PostResponseAdvice implements ResponseBodyAdvice<Object> {
         if (body instanceof Response) {
             return body;
         }
-        if (body instanceof BusinessException) {
-            BusinessException exception = (BusinessException) body;
-            Response objectResponse = new Response<>();
-            objectResponse.message = exception.getMessage();
-            objectResponse.code = String.valueOf(exception.getCode());
-            return objectResponse;
-        }
+
         if (body instanceof String) {
             return body;
         }
@@ -62,8 +56,9 @@ public class PostResponseAdvice implements ResponseBodyAdvice<Object> {
 
     @ExceptionHandler(value = BusinessException.class)
     @ResponseBody
-    public BusinessException BusinessexceptionHandler(HttpServletRequest req, BusinessException e) {
-        return e;
+    public Response BusinessexceptionHandler(HttpServletRequest req, BusinessException e) {
+        e.printStackTrace();
+        return new Response(String.valueOf(e.getCode()), e.getMessage());
     }
 
     @Data
