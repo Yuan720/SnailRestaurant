@@ -32,3 +32,4 @@ build/
 ### VS Code ###
 .vscode/
 /src/main/java/com/woniuxy/snailrestaurant/controller/Demon.java
+!/src/main/java/com/woniuxy/snailrestaurant/controller/TestController.java
