@@ -3,7 +3,9 @@ package com.woniuxy.snailrestaurant.domain;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import com.woniuxy.snailrestaurant.domain.dto.Images;
@@ -19,6 +21,7 @@ public class Dishes implements Serializable {
     /**
      * 主键
      */
+    @TableId(value = "id" ,type = IdType.AUTO)
     private Integer id;
 
     /**
