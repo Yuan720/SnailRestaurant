@@ -89,11 +89,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-websocket</artifactId>
         </dependency>
-       <!-- <dependency>
-            <groupId>com.github.jeffreyning</groupId>
-            <artifactId>extcol</artifactId>
-            <version>0.0.3-RELEASE</version>
-        </dependency>-->
+        <!--参数检验-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

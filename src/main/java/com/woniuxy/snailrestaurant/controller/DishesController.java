@@ -3,8 +3,12 @@ package com.woniuxy.snailrestaurant.controller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.woniuxy.snailrestaurant.common.CommonResultCode;
+import com.woniuxy.snailrestaurant.common.CurrentUser;
+import com.woniuxy.snailrestaurant.common.CurrentUserInfo;
 import com.woniuxy.snailrestaurant.domain.DishDetial;
 import com.woniuxy.snailrestaurant.domain.Dishes;
+import com.woniuxy.snailrestaurant.exception.BusinessException;
 import com.woniuxy.snailrestaurant.service.DishDetialService;
 import com.woniuxy.snailrestaurant.service.DishesService;
 import io.swagger.annotations.*;
@@ -12,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Objects;
 
 @Api(tags = "菜品")
 @RestController
@@ -32,22 +37,30 @@ public class DishesController {
     })
     @GetMapping("/{merchantId}")
     IPage getByMerchantId(@RequestParam(value = "offset", defaultValue = "0", required = false) int offset,
-                                           @RequestParam(value = "pageSize", defaultValue = "15", required = false) int pageSize,
-                                           @PathVariable("merchantId") int merchantId) {
-        IPage page = new Page(offset,pageSize);
+                          @RequestParam(value = "pageSize", defaultValue = "15", required = false) int pageSize,
+                          @PathVariable("merchantId") int merchantId) {
+        IPage page = new Page(offset, pageSize);
         LambdaQueryWrapper<Dishes> lqw = new LambdaQueryWrapper<Dishes>();
-        lqw.eq(Dishes::getMerchantId,merchantId);
-        IPage iPage = ds.page(page,lqw);
+        lqw.eq(Dishes::getMerchantId, merchantId);
+        IPage iPage = ds.page(page, lqw);
         return iPage;
     }
 
 
     @ApiOperation(value = "获取菜品详情")
     @GetMapping("/detial/{id}")
-    DishDetial getDetial(@PathVariable("id") @ApiParam(name = "id",value = "菜品id")int id) {
+    DishDetial getDetial(@PathVariable("id") @ApiParam(name = "id", value = "菜品id") int id) {
         LambdaQueryWrapper<DishDetial> lqw = new LambdaQueryWrapper<DishDetial>();
-        lqw.eq(DishDetial::getDishesId,id);
+        lqw.eq(DishDetial::getDishesId, id);
         DishDetial dishDetial = dishDetialServiceImpl.getOne(lqw);
         return dishDetial;
+    }
+
+    @PostMapping
+    boolean addDishes(@RequestBody Dishes dishes, @CurrentUser CurrentUserInfo currentUserInfo) {
+        if (Objects.isNull(currentUserInfo) ||!currentUserInfo.getAccountType().equals("merchant")) {
+            throw new BusinessException(CommonResultCode.PERMISSION_DENIED);
+        }
+        return ds.save(dishes);
     }
 }

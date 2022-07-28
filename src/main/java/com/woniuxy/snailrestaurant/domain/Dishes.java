@@ -39,7 +39,7 @@ public class Dishes implements Serializable {
     /**
      * 单价
      */
-    private BigDecimal price;
+    private Double price;
 
     /**
      *
