@@ -1,5 +1,7 @@
 package com.woniuxy.snailrestaurant.controller;
 
+import com.woniuxy.snailrestaurant.common.CurrentUser;
+import com.woniuxy.snailrestaurant.common.CurrentUserInfo;
 import com.woniuxy.snailrestaurant.domain.Order;
 import com.woniuxy.snailrestaurant.domain.dto.OrderDTO;
 import io.swagger.annotations.Api;
@@ -17,7 +19,9 @@ public class OrderController {
 
     @ApiOperation(value = "创建订单此处未支付,支持线上点餐,到店点餐,服务员人工点餐,返回订单号")
     @PostMapping("/create")
-    String creatOrder(@RequestBody @ApiParam(name = "dto",value = "订单信息封装") OrderDTO dto) {
+    String creatOrder(@RequestBody @ApiParam(name = "dto",value = "订单信息封装") OrderDTO dto
+            , @CurrentUser CurrentUserInfo userInfo) {
+
         return null;
     }
 
