@@ -5,6 +5,7 @@ import com.woniuxy.snailrestaurant.domain.Order;
 import com.woniuxy.snailrestaurant.service.OrderService;
 import com.woniuxy.snailrestaurant.mapper.OrderMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
 * @author LeeYuan
@@ -15,6 +16,11 @@ import org.springframework.stereotype.Service;
 public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order>
     implements OrderService{
 
+    @Transactional
+    @Override
+    public int delete(String orderNumber, Integer user_id) {
+        return 0;
+    }
 }
 
 

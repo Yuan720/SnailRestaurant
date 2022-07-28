@@ -2,6 +2,8 @@ package com.woniuxy.snailrestaurant.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 /**
@@ -9,6 +11,7 @@ import lombok.Data;
  * @TableName order
  */
 @Data
+@TableName("`order`")
 public class Order implements Serializable {
     /**
      * 第一位字母标识订单类型

@@ -14,6 +14,6 @@ import java.util.List;
 * @createDate 2022-07-25 20:27:40
 */
 public interface OrderItemService extends IService<OrderItem> {
-    List<OrderItem> findByOrderNumer(String orderNumber);
+
 
 }
