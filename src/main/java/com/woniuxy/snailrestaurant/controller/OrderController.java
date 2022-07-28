@@ -50,7 +50,7 @@ public class OrderController {
         return null;
     }
 
-    @ApiOperation(value = "删除订单信息e")
+    @ApiOperation(value = "删除订单信息")
     @DeleteMapping("/{orderNumber}")
     CommonResultCode deleteOrderInfo(@PathVariable("orderNumber") @ApiParam(name = "orderNumber", value = "订单号码") String orderNumber,
                                      @CurrentUser CurrentUserInfo info) {
@@ -73,6 +73,7 @@ public class OrderController {
         if (order.getOrderStatus() == 0) {
             order.setOrderStatus(3);
             b = orderMapper.update(order,lqw);
+
         }
         return b;
 

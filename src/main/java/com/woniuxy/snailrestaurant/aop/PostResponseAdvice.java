@@ -12,12 +12,16 @@ import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @RestControllerAdvice(basePackages = "com.woniuxy.snailrestaurant.controller")
 public class PostResponseAdvice implements ResponseBodyAdvice<Object> {
@@ -50,6 +54,21 @@ public class PostResponseAdvice implements ResponseBodyAdvice<Object> {
     public Response exceptionHandler(HttpServletRequest req, Exception e) {
         e.printStackTrace();
         return new Response("500", "系统内部异常!");
+    }
+
+    @ExceptionHandler(value =   MethodArgumentNotValidException.class)
+    @ResponseBody
+    public Response   methodArgumentNotValidException(HttpServletRequest req,   MethodArgumentNotValidException e) {
+        e.printStackTrace();
+        BindingResult bindingResult = e.getBindingResult();
+        List<ObjectError> allErrors = bindingResult.getAllErrors();
+       StringBuffer stringBuilder=new StringBuffer();
+        for (ObjectError error:allErrors){
+            stringBuilder.append(error.getObjectName()+":");
+            stringBuilder.append(error.getDefaultMessage());
+        }
+
+        return new Response("400", stringBuilder.toString());
     }
 
     @ExceptionHandler(value = BusinessException.class)

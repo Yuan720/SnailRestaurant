@@ -13,7 +13,7 @@ import lombok.Data;
 public class Coupon implements Serializable {
     /**
      * 主键
-     */
+     *
     private Integer id;
 
     /**

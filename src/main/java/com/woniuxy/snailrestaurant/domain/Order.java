@@ -6,6 +6,8 @@ import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * 
  * @TableName order
@@ -28,11 +30,14 @@ A/B/C/D
 随机2位
 45
      */
+
+    @NotNull(message = "订单号不能为空")
     private String id;
 
     /**
      * 用户id
      */
+    @NotNull(message = "用户名不能为空")
     private Integer userId;
 
     /**

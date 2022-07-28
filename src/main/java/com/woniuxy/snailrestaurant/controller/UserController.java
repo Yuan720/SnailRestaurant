@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Date;
 import java.util.Objects;
 
@@ -28,12 +29,13 @@ public class UserController {
             @ApiImplicitParam(name = "user", value = "用户账号,密码,json封装", required = true)
     })
     @PostMapping("/login")
-    CustomResponse login(@RequestBody User user) {
+    CustomResponse login(@Valid @RequestBody User user) {
         CustomResponse customResponse = new CustomResponse();
         QueryWrapper<User> wrapper = new QueryWrapper<>();
         String passwd = Sha256.encrypt(user.getHashedPasswd());
         wrapper.eq("user_name", user.getUserName()).and(w -> {
             w.eq("hashed_passwd", passwd);
+
         });
         User find = service.getOne(wrapper);
         String sign;

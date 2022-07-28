@@ -17,8 +17,4 @@ public interface OrderService extends IService<Order> {
      * @return
      */
     int delete(String orderNumber,Integer user_id);
-
-
-
-
 }
