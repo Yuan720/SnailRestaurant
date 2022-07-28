@@ -14,5 +14,5 @@ import java.util.List;
 */
 public interface MerchantService extends IService<Merchant> {
 
-        List<NearMerchantVo> getNear(Page<NearMerchantVo> merchantVoPage, String query);
+        Page<List<NearMerchantVo>> getNear(Page<NearMerchantVo> merchantVoPage, String query);
 }

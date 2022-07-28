@@ -15,7 +15,8 @@ import java.util.List;
  * @Entity com.woniuxy.snailrestaurant.domain.Merchant
  */
 public interface MerchantMapper extends BaseMapper<Merchant> {
-    List<NearMerchantVo> getNear(Page<NearMerchantVo> merchantVoPage, @Param("query") String query);
+    Page<List<NearMerchantVo>> getNear(Page<NearMerchantVo> merchantVoPage, @Param("query") String query);
+
 
 }
 

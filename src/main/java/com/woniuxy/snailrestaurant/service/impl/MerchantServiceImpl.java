@@ -23,9 +23,8 @@ public class MerchantServiceImpl extends ServiceImpl<MerchantMapper, Merchant>
     MerchantMapper mapper;
 
     @Override
-    public List<NearMerchantVo> getNear(Page<NearMerchantVo> merchantVoPage, String query) {
-
-      return   mapper.getNear(merchantVoPage,query);
+    public Page<List<NearMerchantVo>> getNear(Page<NearMerchantVo> merchantVoPage, String query) {
+        return   mapper.getNear(merchantVoPage,query);
     }
 }
 

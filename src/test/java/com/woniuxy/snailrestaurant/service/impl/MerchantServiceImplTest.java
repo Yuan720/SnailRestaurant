@@ -27,7 +27,7 @@ MerchantService service;
     @Test
     void getNearMerchant() {
         Page<NearMerchantVo> nearMerchantVoPage = new Page<>(1,4);
-        List<NearMerchantVo> near = service.getNear(nearMerchantVoPage, "point(113.895197 22.508724)");
+        Page<List<NearMerchantVo>> near = service.getNear(nearMerchantVoPage, "point(113.895197 22.508724)");
         System.out.println("");
     }
 }
