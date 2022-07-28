@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 public class BookingOrderServiceImpl extends ServiceImpl<BookingOrderMapper, BookingOrder>
     implements BookingOrderService{
 
+
 }
 
 

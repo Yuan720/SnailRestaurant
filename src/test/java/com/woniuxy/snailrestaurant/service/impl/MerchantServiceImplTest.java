@@ -16,18 +16,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class MerchantServiceImplTest {
 @Autowired
-    DishesService service;
-@Autowired
-    UserService userService;
+MerchantService service;
     @Test
     void getNearMerchant() {
-        Dishes byId = service.getById(1);
-
-        System.out.println();
+        Page<NearMerchantVo> nearMerchantVoPage = new Page<>(1,4);
+        List<NearMerchantVo> near = service.getNear(nearMerchantVoPage, "point(113.895197 22.508724)");
+        System.out.println("");
     }
 }

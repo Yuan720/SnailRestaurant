@@ -2,15 +2,19 @@ package com.woniuxy.snailrestaurant.controller;
 
 import com.woniuxy.snailrestaurant.domain.Merchant;
 import com.woniuxy.snailrestaurant.domain.MerchantAccount;
+import com.woniuxy.snailrestaurant.mapper.MerchantMapper;
+import com.woniuxy.snailrestaurant.service.MerchantService;
 import io.swagger.annotations.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 import java.util.List;
 
 @Api(tags = "商家")
 @RestController
 @RequestMapping("/merchant")
 public class MerchantController {
-
 
     @ApiOperation("查询返回附近的商家列表")
     @ApiImplicitParams({
