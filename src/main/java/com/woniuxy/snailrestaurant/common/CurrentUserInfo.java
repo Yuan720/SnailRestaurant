@@ -8,4 +8,7 @@ import lombok.experimental.Accessors;
 public class CurrentUserInfo {
     Integer id;
     String name;
+    //merchant|customer
+    String accountType;
+    Integer role;
 }

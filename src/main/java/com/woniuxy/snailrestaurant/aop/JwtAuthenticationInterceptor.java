@@ -43,7 +43,7 @@ public class JwtAuthenticationInterceptor implements HandlerInterceptor {
         Algorithm alg = Algorithm.HMAC256(secretKey);
         Verification verification = JWT.require(alg);
         verification.acceptExpiresAt(System.currentTimeMillis());
-        verification.acceptNotBefore(System.currentTimeMillis()-1000*60*60*24*5);
+        verification.acceptNotBefore(System.currentTimeMillis() - 1000 * 60 * 60 * 24 * 5);
         JWTVerifier jwtVerifier = null;
         jwtVerifier = verification.build();
         DecodedJWT decodedJWT;
@@ -63,7 +63,11 @@ public class JwtAuthenticationInterceptor implements HandlerInterceptor {
         // 为CurrentUserMethodArgumentResolver中的currentUserInfo设置用户信息
         CurrentUserInfo currentUserInfo = new CurrentUserInfo();
         currentUserInfo.setId(decodedJWT.getClaim("id").asInt())
-                .setName(decodedJWT.getClaim("userName").asString());
+                .setName(decodedJWT.getClaim("userName").asString())
+                .setAccountType(decodedJWT.getClaim("accountType").asString());
+        if (decodedJWT.getClaim("accountType").asString().equals("merchant")) {
+            currentUserInfo.setRole(decodedJWT.getClaim("role").asInt());
+        }
         request.setAttribute("currentUserInfo", currentUserInfo);
         return true;
     }

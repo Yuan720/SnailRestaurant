@@ -43,6 +43,7 @@ public class UserController {
             sign = JWT.create()
                     .withClaim("userName", find.getUserName())
                     .withClaim("id",find.getId())
+                    .withClaim("accountType","customer")
                     .withIssuedAt(new Date()).withExpiresAt(new Date(t)).sign(alg);
             customResponse.setCode(CommonResultCode.SUCCESS.getCode()).setData(sign).setMessage(CommonResultCode.SUCCESS.getMsg());
         } else {
