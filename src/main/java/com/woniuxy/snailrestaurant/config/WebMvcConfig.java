@@ -1,12 +1,20 @@
 package com.woniuxy.snailrestaurant.config;
 
+import com.woniuxy.snailrestaurant.aop.JwtAuthenticationInterceptor;
+import com.woniuxy.snailrestaurant.common.CurrentUserMethodArgumentResolver;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.servlet.config.annotation.*;
+
+import java.util.List;
 
 @Configuration
-public class WebMvcConfig extends WebMvcConfigurationSupport {
+public class WebMvcConfig implements WebMvcConfigurer {
+
+    @Autowired
+    JwtAuthenticationInterceptor interceptor;
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
@@ -20,12 +28,22 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     }
 
     @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+    public void addInterceptors(InterceptorRegistry registry) {
 
-        /** swagger配置 */
-        registry.addResourceHandler("/swagger-ui/**")
-                .addResourceLocations("classpath:/META-INF/resources/webjars/springfox-swagger-ui/");
-        super.addResourceHandlers(registry);
-
+        registry.addInterceptor(interceptor).addPathPatterns("/**").excludePathPatterns("/user/login");
     }
+
+
+    @Override
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
+        resolvers.add(currentUserMethodArgumentResolver());
+    }
+
+
+    @Bean
+    public CurrentUserMethodArgumentResolver currentUserMethodArgumentResolver() {
+        return new CurrentUserMethodArgumentResolver();
+    }
+
+
 }

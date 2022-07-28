@@ -10,11 +10,11 @@
             <result property="name" column="name" jdbcType="VARCHAR"/>
             <result property="totalSales" column="total_sales" jdbcType="INTEGER"/>
             <result property="price" column="price" jdbcType="DECIMAL"/>
+            <result property="images" column="images" typeHandler="com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id,merchant_id,name,
-        total_sales,price
+        total_sales,price,JSON_EXTRACT('images','$.images') images
     </sql>
-
 </mapper>

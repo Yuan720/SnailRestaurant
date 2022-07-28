@@ -1,14 +1,12 @@
 package com.woniuxy.snailrestaurant.aop;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.woniuxy.snailrestaurant.common.CustomResponse;
 import com.woniuxy.snailrestaurant.common.NoAdvice;
 import com.woniuxy.snailrestaurant.exception.BusinessException;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -37,13 +35,7 @@ public class PostResponseAdvice implements ResponseBodyAdvice<Object> {
         if (body instanceof Response) {
             return body;
         }
-        if (body instanceof BusinessException) {
-            BusinessException exception = (BusinessException) body;
-            Response objectResponse = new Response<>();
-            objectResponse.message = exception.getMessage();
-            objectResponse.code = String.valueOf(exception.getCode());
-            return objectResponse;
-        }
+
         if (body instanceof String) {
             return body;
         }
@@ -62,8 +54,9 @@ public class PostResponseAdvice implements ResponseBodyAdvice<Object> {
 
     @ExceptionHandler(value = BusinessException.class)
     @ResponseBody
-    public BusinessException BusinessexceptionHandler(HttpServletRequest req, BusinessException e) {
-        return e;
+    public Response BusinessexceptionHandler(HttpServletRequest req, BusinessException e) {
+        e.printStackTrace();
+        return new Response(String.valueOf(e.getCode()), e.getMessage());
     }
 
     @Data

@@ -3,23 +3,28 @@ package com.woniuxy.snailrestaurant.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.oas.annotations.EnableOpenApi;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.Contact;
+import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Lazy(value = false)
 @Configuration
 public class SwaggerConfig {
     @Bean
     public Docket docket() {
-        return new Docket(DocumentationType.SWAGGER_2)
+        return new Docket(DocumentationType.OAS_30)
                 //配置Swagger信息
-                .apiInfo(apiInfo()).select()
+                .apiInfo(apiInfo())
+                .securitySchemes(Arrays.asList(tokenScheme()))
+                .securityContexts(Arrays.asList(tokenContext()))
+                .select()
                 .apis(RequestHandlerSelectors
                         .basePackage("com.woniuxy.snailrestaurant.controller")).build();
     }
@@ -42,5 +47,22 @@ public class SwaggerConfig {
                 "Apache 2.0",
                 "http://www.apache.org/licenses/LICENSE-2.0",
                 new ArrayList<>());
+    }
+
+
+
+
+    private HttpAuthenticationScheme tokenScheme() {
+        return HttpAuthenticationScheme.JWT_BEARER_BUILDER.name("Authorization").build();
+    }
+
+    private SecurityContext tokenContext() {
+        return SecurityContext.builder()
+                .securityReferences(Arrays.asList(SecurityReference.builder()
+                        .scopes(new AuthorizationScope[0])
+                        .reference("Authorization")
+                        .build()))
+                .operationSelector(o -> o.requestMappingPattern().matches("/.*"))
+                .build();
     }
 }

@@ -76,7 +76,7 @@ public class FileServiceImpl implements FileService {
                 contentType= MediaType.APPLICATION_PDF_VALUE;
                 break;
             default:
-                break;
+                throw new RuntimeException();
 
         }
     if (Objects.isNull(extension)){

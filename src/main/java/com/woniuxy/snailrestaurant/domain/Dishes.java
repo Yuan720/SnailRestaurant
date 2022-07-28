@@ -2,13 +2,19 @@ package com.woniuxy.snailrestaurant.domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
+import com.woniuxy.snailrestaurant.domain.dto.Images;
 import lombok.Data;
 
 /**
- * 
+ *
  * @TableName dishes
  */
 @Data
+@TableName(autoResultMap = true)
 public class Dishes implements Serializable {
     /**
      * 主键
@@ -34,6 +40,12 @@ public class Dishes implements Serializable {
      * 单价
      */
     private BigDecimal price;
+
+    /**
+     *
+     */
+    @TableField(typeHandler = JacksonTypeHandler.class)
+    private Images images;
 
     private static final long serialVersionUID = 1L;
 }
