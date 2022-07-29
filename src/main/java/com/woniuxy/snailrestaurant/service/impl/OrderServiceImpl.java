@@ -40,9 +40,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order>
         lqw1.eq(Order::getUserId,userId);
         int delete = orderMapper.delete(lqw1);
         LambdaQueryWrapper<OrderItem> lqw2 = new LambdaQueryWrapper<OrderItem>();
-
+        lqw2.eq(OrderItem::getOrderNumber,orderNumber);
         orderItemMapper.delete(lqw2);
-        return 0;
+        return delete;
     }
 }
 

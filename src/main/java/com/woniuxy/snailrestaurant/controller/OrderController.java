@@ -52,10 +52,11 @@ public class OrderController {
 
     @ApiOperation(value = "删除订单信息")
     @DeleteMapping("/{orderNumber}")
-    CommonResultCode deleteOrderInfo(@PathVariable("orderNumber") @ApiParam(name = "orderNumber", value = "订单号码") String orderNumber,
+    int deleteOrderInfo(@PathVariable("orderNumber") @ApiParam(name = "orderNumber", value = "订单号码") String orderNumber,
                                      @CurrentUser CurrentUserInfo info) {
-
-        return null;
+        Integer userId = info.getId();
+        int delete = os.delete(orderNumber,userId);
+        return delete;
     }
 
     @ApiOperation(value = "取消订单")
