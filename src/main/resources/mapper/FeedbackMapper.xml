@@ -5,14 +5,16 @@
 <mapper namespace="com.woniuxy.snailrestaurant.mapper.FeedbackMapper">
 
     <resultMap id="BaseResultMap" type="com.woniuxy.snailrestaurant.domain.Feedback">
-            <id property="id" column="id" jdbcType="INTEGER"/>
-            <result property="userId" column="user_id" jdbcType="INTEGER"/>
-            <result property="orderNumber" column="order _number" jdbcType="INTEGER"/>
-            <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="orderNumber" column="order_number" jdbcType="VARCHAR"/>
+        <result property="typeId" column="type_id" jdbcType="INTEGER"></result>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,user_id,order _number,
+        id
+        ,user_id,order _number,
         remark
     </sql>
 </mapper>
