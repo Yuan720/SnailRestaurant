@@ -3,6 +3,8 @@ package com.woniuxy.snailrestaurant.controller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.woniuxy.snailrestaurant.common.CurrentUser;
+import com.woniuxy.snailrestaurant.common.CurrentUserInfo;
 import com.woniuxy.snailrestaurant.domain.DeliverInfo;
 import com.woniuxy.snailrestaurant.domain.Dishes;
 import com.woniuxy.snailrestaurant.service.DeliverInfoService;
@@ -21,7 +23,7 @@ public class DeliverInfoController {
     @Resource
     private DeliverInfoService dis;
     @ApiOperation(value = "获取用户收餐信息表")
-    @GetMapping("/user/{id}")
+    @GetMapping
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "用户id", required = true),
             @ApiImplicitParam(name = "offset", value = "分页起始值", required = false),
@@ -30,17 +32,17 @@ public class DeliverInfoController {
     IPage getDeliverInfoByUserId(
             @RequestParam(value = "offset", defaultValue = "0", required = false) int offset,
             @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize,
-            @PathVariable("id") int id) {
+            @CurrentUser CurrentUserInfo info) {
         IPage page = new Page(offset,pageSize);
         LambdaQueryWrapper<DeliverInfo> lqw = new LambdaQueryWrapper<DeliverInfo>();
-        lqw.eq(DeliverInfo::getUserId,id);
+        lqw.eq(DeliverInfo::getUserId,info.getId());
         IPage iPage = dis.page(page,lqw);
         return iPage;
     }
 
     @ApiOperation(value = "增加用户收餐信息")
-    @PostMapping("/user/{id}")
-    int addDeliverInfo(@PathVariable("id") @ApiParam(name = "id", value = "用户id") int id
+    @PostMapping
+    int addDeliverInfo( @ApiParam(name = "id", value = "用户id") @CurrentUser CurrentUserInfo info
             , @RequestBody @ApiParam(name = "deliverInfo", value = "收餐信息json") DeliverInfo deliverInfo) {
         return 0;
     }

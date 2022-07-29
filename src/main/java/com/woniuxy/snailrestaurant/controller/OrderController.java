@@ -13,9 +13,8 @@ import com.woniuxy.snailrestaurant.mapper.OrderMapper;
 import com.woniuxy.snailrestaurant.service.DishesService;
 import com.woniuxy.snailrestaurant.service.OrderItemService;
 import com.woniuxy.snailrestaurant.service.OrderService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.*;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -34,13 +33,25 @@ public class OrderController {
     @Resource
     private OrderMapper orderMapper;
 
-
     @ApiOperation(value = "创建订单此处未支付,支持线上点餐,到店点餐,服务员人工点餐,返回订单号")
     @PostMapping("/create")
     CustomResponse creatOrder(@RequestBody @ApiParam(name = "dto", value = "订单信息封装") OrderDTO dto
             , @CurrentUser CurrentUserInfo info) {
         os.createOrder(dto, info);
         return new CustomResponse().setMessage("操作成功").setCode(10000);
+    }
+
+
+    @ApiOperation("订单支付")
+    @ApiImplicitParams(
+            {
+                    @ApiImplicitParam(name = "orderNum", value = "订单号码"),
+                    @ApiImplicitParam(value = "methodId", name = "支付方式id")
+            }
+    )
+    @PostMapping
+    CustomResponse pay(@Param("orderNum") String orderNum, Integer methodId) {
+        return null;
     }
 
 

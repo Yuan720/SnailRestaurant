@@ -21,6 +21,7 @@ public interface OrderService extends IService<Order> {
     int delete(String orderNumber,Integer user_id);
 
     boolean createOrder(OrderDTO dto, CurrentUserInfo info);
+    boolean payOrder(String orderNum, Integer methodId);
 
 
 

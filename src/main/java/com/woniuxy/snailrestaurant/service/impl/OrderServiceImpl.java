@@ -91,6 +91,11 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order>
         }
         return true;
     }
+
+    @Override
+    public boolean payOrder(String orderNum, Integer methodId) {
+        return false;
+    }
 }
 
 
