@@ -45,7 +45,8 @@ public class MerchantController {
 
     @ApiOperation("添加商户")
     @PostMapping
-    boolean addMerchant(Merchant merchant) {
+    boolean addMerchant(@RequestBody Merchant merchant) {
+
         return false;
     }
 

@@ -1,7 +1,9 @@
 package com.woniuxy.snailrestaurant.service;
 
+import com.woniuxy.snailrestaurant.common.CurrentUserInfo;
 import com.woniuxy.snailrestaurant.domain.Order;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.woniuxy.snailrestaurant.domain.dto.OrderDTO;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -17,6 +19,8 @@ public interface OrderService extends IService<Order> {
      * @return
      */
     int delete(String orderNumber,Integer user_id);
+
+    boolean createOrder(OrderDTO dto, CurrentUserInfo info);
 
 
 

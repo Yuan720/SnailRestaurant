@@ -5,13 +5,15 @@ import java.util.Date;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
- * 
+ *
  * @TableName order
  */
 @Data
 @TableName("`order`")
+@Accessors(chain = true)
 public class Order implements Serializable {
     /**
      * 第一位字母标识订单类型
@@ -58,7 +60,7 @@ A/B/C/D
     /**
      * 总金额
      */
-    private Integer totalCount;
+    private Double totalCount;
 
     /**
      * 优惠券

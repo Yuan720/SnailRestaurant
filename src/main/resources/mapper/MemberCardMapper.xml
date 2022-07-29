@@ -10,10 +10,17 @@
             <result property="balance" column="balance" jdbcType="DECIMAL"/>
             <result property="merchantId" column="merchant_id" jdbcType="INTEGER"/>
             <result property="level" column="level" jdbcType="TINYINT"/>
+            <result property="useTimes" column="use_times" jdbcType="INTEGER"/>
+            <result property="totalConsum" column="total_consum" jdbcType="DECIMAL"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="tel" column="tel" jdbcType="VARCHAR"/>
+            <result property="sex" column="sex" jdbcType="CHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id,user_id,balance,
-        merchant_id,level
+        merchant_id,level,use_times,
+        total_consum,create_time,tel,
+        sex
     </sql>
 </mapper>
