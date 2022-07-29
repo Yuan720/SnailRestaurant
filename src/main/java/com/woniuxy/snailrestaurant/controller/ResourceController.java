@@ -56,5 +56,9 @@ public class ResourceController {
         return "upload";
     }
 
+    @GetMapping("/review")
+    String reviewPage(){
+        return "review";
+    }
 
 }
