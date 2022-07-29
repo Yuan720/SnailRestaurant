@@ -5,16 +5,18 @@
 <mapper namespace="com.woniuxy.snailrestaurant.mapper.ReviewMapper">
 
     <resultMap id="BaseResultMap" type="com.woniuxy.snailrestaurant.domain.Review">
-            <id property="id" column="id" jdbcType="INTEGER"/>
-            <result property="dishesId" column="dishes_id" jdbcType="INTEGER"/>
-            <result property="content" column="content" jdbcType="VARCHAR"/>
-            <result property="reviewDate" column="review_date" jdbcType="TIMESTAMP"/>
-            <result property="userId" column="user_id" jdbcType="INTEGER"/>
-            <result property="star" column="star" jdbcType="TINYINT"/>
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="dishesId" column="dishes_id" jdbcType="INTEGER"/>
+        <result property="content" column="content" jdbcType="VARCHAR"/>
+        <result property="reviewDate" column="review_date" jdbcType="TIMESTAMP"/>
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="star" column="star" jdbcType="TINYINT"/>
+        <result property="images" column="images" typeHandler="com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler"></result>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,dishes_id,content,
+        id
+        ,dishes_id,content,
         review_date,user_id,star
     </sql>
 </mapper>
