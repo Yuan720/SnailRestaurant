@@ -16,4 +16,6 @@ public interface FileService {
     void downLoad(HttpServletResponse response, String fileKey);
 
     String saveFile(MultipartFile file);
+
+    String[] saveFile(MultipartFile[] files);
 }

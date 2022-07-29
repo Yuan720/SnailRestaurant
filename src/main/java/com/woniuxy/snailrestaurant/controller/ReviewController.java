@@ -5,9 +5,11 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.woniuxy.snailrestaurant.domain.Dishes;
 import com.woniuxy.snailrestaurant.domain.Review;
+import com.woniuxy.snailrestaurant.domain.dto.ReviewDTO;
 import com.woniuxy.snailrestaurant.service.ReviewService;
 import io.swagger.annotations.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -18,7 +20,7 @@ import java.util.List;
 public class ReviewController {
 
     @Resource
-    private ReviewService review;
+    private ReviewService reviewService;
     @ApiOperation(value = "根据菜品id查询评论")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id",value = "菜品id",required = true),
@@ -33,16 +35,18 @@ public class ReviewController {
         IPage page = new Page(offSet,pageSize);
         LambdaQueryWrapper<Review> lqw = new LambdaQueryWrapper<Review>();
         lqw.eq(Review::getDishesId,dishesId);
-        IPage iPage = review.page(page,lqw);
+        IPage iPage = reviewService.page(page,lqw);
         return iPage;
     }
 
 
     @ApiOperation(value = "添加评论")
     @PostMapping
-    int addReview(@RequestBody @ApiParam(name = "review",value = "评论内容json请求体") Review review){
-
-        return 0;
+    boolean addReview(@ApiParam(name = "review",value = "评论内容")Review review
+            ,@ApiParam(name = "files",value = "文件数组") @RequestPart("file") MultipartFile[] files)
+    {
+        reviewService.addReview(review,files);
+        return true;
     }
 
 
