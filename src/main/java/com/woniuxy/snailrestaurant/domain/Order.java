@@ -2,8 +2,11 @@ package com.woniuxy.snailrestaurant.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -112,6 +115,9 @@ A/B/C/D
 待制作,准备中,已制作
      */
     private String prepareStatus;
+
+    @TableField(exist=false)
+    private List<OrderItem> items;
 
     private static final long serialVersionUID = 1L;
 }

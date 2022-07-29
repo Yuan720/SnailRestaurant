@@ -10,6 +10,7 @@ import com.woniuxy.snailrestaurant.mapper.CouponPackageMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
 * @author LeeYuan
@@ -27,10 +28,10 @@ public class CouponPackageServiceImpl extends ServiceImpl<CouponPackageMapper, C
     public IPage<CouponPackage> findByUserId(int offset, int pageSize, int userId, int status) {
         IPage page = new Page(offset,pageSize);
         QueryWrapper<CouponPackage> qw = new QueryWrapper<CouponPackage>();
-        qw.eq("user_id",userId);
-        qw.eq("status",status);
-        IPage iPage = couponPackageMapper.findPage(page,qw);
-        return iPage;
+        qw.eq("cp.user_id",userId);
+        qw.eq("cp.status",status);
+        IPage<CouponPackage>  a = couponPackageMapper.findPage(page,qw);
+        return a;
     }
 }
 

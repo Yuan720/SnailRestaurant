@@ -3,6 +3,7 @@ package com.woniuxy.snailrestaurant.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 
 /**
@@ -37,6 +38,9 @@ public class CouponPackage implements Serializable {
      * 状态,是否领取,是否过期,是否使用
      */
     private String status;
+
+    @TableField(exist=false)
+    private Coupon coupon;
 
     private static final long serialVersionUID = 1L;
 }

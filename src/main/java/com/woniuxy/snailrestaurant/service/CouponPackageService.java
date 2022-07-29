@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.PutMapping;
 
 import java.sql.Wrapper;
+import java.util.List;
 
 /**
 * @author LeeYuan
@@ -14,5 +15,5 @@ import java.sql.Wrapper;
 * @createDate 2022-07-25 20:27:40
 */
 public interface CouponPackageService extends IService<CouponPackage> {
-    IPage<CouponPackage> findByUserId(int offset,int pageSize,int userId,int status);
+    IPage<CouponPackage> findByUserId(int offset, int pageSize, int userId, int status);
 }
