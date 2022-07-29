@@ -8,11 +8,10 @@ import java.util.HashMap;
 @Data
 public class OrderDTO {
     //菜品-数量键值对
-    HashMap<Integer, Integer> disheInfo;
+   HashMap<Integer, Integer> disheInfo;
     //收餐地址id
     Integer deliverInfoId;
     //优惠券id
-    @Nullable
     Integer couponId;
     //订单类型
     Integer type;
@@ -24,5 +23,9 @@ public class OrderDTO {
     Integer machineId;
     //操作员id
     Integer operatorId;
+    //备注
+    String remark;
+    //餐具数量
+    Integer tableware;
 
 }

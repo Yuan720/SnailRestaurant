@@ -2,10 +2,14 @@ package com.woniuxy.snailrestaurant.domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 /**
- * 
+ *
  * @TableName order_item
  */
 @Data
@@ -13,10 +17,11 @@ public class OrderItem implements Serializable {
     /**
      * 主键
      */
+    @TableId(type = IdType.AUTO)
     private Integer id;
 
     /**
-     * 
+     *
      */
     private String orderNumber;
 
@@ -28,7 +33,7 @@ public class OrderItem implements Serializable {
     /**
      * 单价
      */
-    private BigDecimal price;
+    private Double price;
 
     /**
      * 图片
