@@ -10,6 +10,7 @@
         <result property="orderNumber" column="order_number" jdbcType="VARCHAR"/>
         <result property="typeId" column="type_id" jdbcType="INTEGER"></result>
         <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <result property="images" column="images" typeHandler="com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler"/>
     </resultMap>
 
     <sql id="Base_Column_List">
