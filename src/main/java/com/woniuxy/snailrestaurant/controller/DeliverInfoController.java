@@ -19,7 +19,7 @@ public class DeliverInfoController {
     private DeliverInfoService dis;
 
     @ApiOperation(value = "获取用户收餐信息表")
-    @GetMapping
+    @GetMapping("/list")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "用户id", required = true),
             @ApiImplicitParam(name = "offset", value = "分页起始值"),

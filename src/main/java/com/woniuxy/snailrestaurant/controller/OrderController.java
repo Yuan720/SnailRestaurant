@@ -3,6 +3,7 @@ package com.woniuxy.snailrestaurant.controller;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.woniuxy.snailrestaurant.common.*;
 import com.woniuxy.snailrestaurant.domain.Dishes;
 import com.woniuxy.snailrestaurant.domain.Order;
@@ -64,7 +65,7 @@ public class OrderController {
 
     @ApiOperation(value = "获取订单信息")
     @GetMapping("/{orderNumber}")
-    List<Order> getOrderInfo(@PathVariable("orderNumber") @ApiParam(name = "orderNumber", value = "订单号码") String orderNumber) {
+    IPage<Order> getOrderInfo(@PathVariable("orderNumber") @ApiParam(name = "orderNumber", value = "订单号码") String orderNumber) {
         return null;
     }
 
