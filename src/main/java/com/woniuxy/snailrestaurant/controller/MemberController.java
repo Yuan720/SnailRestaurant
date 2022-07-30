@@ -25,11 +25,11 @@ public class MemberController {
    @ApiOperation("列出会员信息")
    @ApiImplicitParams({
            @ApiImplicitParam(name = "MemberCardQo", value = "会员查询条件",paramType = "query"),
-           @ApiImplicitParam(name = "page", value = "起始页",paramType = "query"),
+           @ApiImplicitParam(name = "current", value = "起始页",paramType = "query"),
            @ApiImplicitParam(name = "size", value = "页大小",paramType = "query")
    })
 
-    @GetMapping
+    @GetMapping("/list")
     public Page<MemberDetailVo> listMember(MemberCardQo memberCardQo,
                                            Integer current,
                                            Integer size) {
