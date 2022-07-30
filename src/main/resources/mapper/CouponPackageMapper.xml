@@ -9,7 +9,7 @@
             <result property="userId" column="user_id" jdbcType="INTEGER"/>
             <result property="couponId" column="coupon_id" jdbcType="INTEGER"/>
             <result property="pickTime" column="pick_time" jdbcType="TIMESTAMP"/>
-            <result property="status" column="status" jdbcType="VARCHAR"/>
+            <result property="status" column="status" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">

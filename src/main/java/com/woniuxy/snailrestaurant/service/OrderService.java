@@ -22,6 +22,12 @@ public interface OrderService extends IService<Order> {
 
     boolean createOrder(OrderDTO dto, CurrentUserInfo info);
     boolean payOrder(String orderNum, Integer methodId);
+    /*
+    *@param pre_count 未进行折扣前的金额
+    * @param couponId 使用的优惠券
+    * @return 折扣后的金额
+    **/
+    double billCount(double pre_count,int couponId);
 
 
 

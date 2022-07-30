@@ -6,19 +6,14 @@ import com.woniuxy.snailrestaurant.common.CommonResultCode;
 import com.woniuxy.snailrestaurant.common.CurrentUserInfo;
 import com.woniuxy.snailrestaurant.common.OrderNumberGenerator;
 import com.woniuxy.snailrestaurant.common.PaymentMethod;
-import com.woniuxy.snailrestaurant.domain.CouponPackage;
-import com.woniuxy.snailrestaurant.domain.Dishes;
-import com.woniuxy.snailrestaurant.domain.Order;
-import com.woniuxy.snailrestaurant.domain.OrderItem;
+import com.woniuxy.snailrestaurant.domain.*;
 import com.woniuxy.snailrestaurant.domain.dto.OrderDTO;
 import com.woniuxy.snailrestaurant.exception.BusinessException;
 import com.woniuxy.snailrestaurant.payment.PaymentHandler;
 import com.woniuxy.snailrestaurant.payment.PaymentHandlerFactory;
-import com.woniuxy.snailrestaurant.service.CouponPackageService;
-import com.woniuxy.snailrestaurant.service.DishesService;
-import com.woniuxy.snailrestaurant.service.OrderItemService;
-import com.woniuxy.snailrestaurant.service.OrderService;
+import com.woniuxy.snailrestaurant.service.*;
 import com.woniuxy.snailrestaurant.mapper.OrderMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,6 +29,7 @@ import java.util.*;
  * @description 针对表【order】的数据库操作Service实现
  * @createDate 2022-07-26 18:58:33
  */
+@Slf4j
 @Service
 public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order>
         implements OrderService {
@@ -45,6 +41,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order>
     CouponPackageService couponPackageService;
     @Autowired
     PaymentHandlerFactory paymentHandlerFactory;
+
+    @Autowired
+    CouponService couponService;
 
     @Transactional
     @Override
@@ -81,8 +80,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order>
         for (Dishes dishe : list) {
             total_count += dishe.getPrice() * disheInfo.get(dishe.getId());
         }
-        order.setTotalCount(total_count);
+        order.setTotalCount(billCount(total_count, dto.getCouponId()));
         save(order);
+        ArrayList<OrderItem> items = new ArrayList<>();
         for (Dishes dishe : list) {
             OrderItem orderItem = new OrderItem();
             orderItem.setOrderNumber(orderNumber);
@@ -95,15 +95,15 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order>
                 } else {
                     orderItem.setType(1);
                 }
-
             }
             if (dishe.getImages() != null) {
                 orderItem.setImagekey(dishe.getImages().getImages()[0]);
             }
             orderItem.setPrice(dishe.getPrice());
             orderItem.setItemNum(disheInfo.get(dishe.getId()));
-            orderItemService.save(orderItem);
+            items.add(orderItem);
         }
+        orderItemService.saveBatch(items);
         return true;
     }
 
@@ -134,6 +134,49 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order>
 
         PaymentHandler instance = paymentHandlerFactory.getInstance(method);
         return instance.handlePayment(orderNum);
+    }
+
+    @Override
+    public double billCount(double pre_count, int couponId) {
+        Coupon byId = couponService.getById(couponId);
+        assert byId != null;
+        if (!verifyCoupon(byId, pre_count)) {
+            //如果原价券,则没有优惠
+            log.info("不满足优惠条件,原价输出...");
+            return pre_count;
+        }
+        //满减
+        if (byId.getType() == 1 || byId.getType() == 3) {
+            return pre_count - byId.getValue().doubleValue();
+
+        }
+        //打折
+        if (byId.getType() == 2 || byId.getType() == 4) {
+            return pre_count * byId.getDiscount() / 100;
+        }
+
+        return pre_count;
+
+    }
+
+    boolean verifyCoupon(Coupon coupon) {
+        Date now = new Date();
+        if (coupon.getEndTime().before(now)) {
+            return false;
+        }
+        if (coupon.getStartTime().after(now)) {
+            return false;
+        }
+        return true;
+    }
+
+    boolean verifyCoupon(Coupon coupon, double payMount) {
+        if (verifyCoupon(coupon)) {
+            if (payMount > coupon.getMinimumPay().doubleValue()) {
+                return true;
+            }
+        }
+        return false;
     }
 }
 

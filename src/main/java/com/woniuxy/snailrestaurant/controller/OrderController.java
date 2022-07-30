@@ -51,7 +51,8 @@ public class OrderController {
             }
     )
     @PostMapping
-    CustomResponse pay(@Param("orderNum") String orderNum, @Valid @NotNull(message = "pay method is needed") Integer methodId) {
+    CustomResponse pay(@Param("orderNum") String orderNum, @Valid @NotNull(message = "pay method is needed") Integer methodId)
+    {
         return null;
     }
 

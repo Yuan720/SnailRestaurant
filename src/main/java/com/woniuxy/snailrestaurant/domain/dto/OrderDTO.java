@@ -3,6 +3,7 @@ package com.woniuxy.snailrestaurant.domain.dto;
 import com.sun.istack.internal.Nullable;
 import lombok.Data;
 
+import java.util.Date;
 import java.util.HashMap;
 
 @Data
@@ -28,5 +29,6 @@ public class OrderDTO {
     //餐具数量
     Integer tableware;
     Integer couponPackageId;
+    Date expectedTime;
 
 }

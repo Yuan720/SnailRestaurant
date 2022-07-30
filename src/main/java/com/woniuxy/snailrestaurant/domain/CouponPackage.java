@@ -38,7 +38,7 @@ public class CouponPackage implements Serializable {
     /**
      * 状态,是否领取,是否过期,是否使用
      */
-    private String status;
+    private Integer status;
 
     @TableField(exist=false)
     private Coupon coupon;

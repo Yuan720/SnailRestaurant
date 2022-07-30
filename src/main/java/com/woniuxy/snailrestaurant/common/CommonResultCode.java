@@ -10,7 +10,8 @@ public enum CommonResultCode {
     NO_USER_EXIST_RO_INCORRECT_CREDENTIAL(10006,"登录名或密码错误！"),
     SOME_DISHES_OUT_OF_STOCK(10008,"部分菜品已无库存！"),
     NO_SUCH_COUPON(10009,"优惠券不存在"),
-    NO_SUCH_ORDER(10009,"订单不存在");;
+    NO_SUCH_ORDER(10010,"订单不存在"),
+    INVALID_COUPON(10011,"优惠券无效");;
 
     CommonResultCode(Integer code, String msg) {
         this.code =code;
