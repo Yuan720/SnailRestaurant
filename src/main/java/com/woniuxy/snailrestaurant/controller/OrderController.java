@@ -11,12 +11,18 @@ import com.woniuxy.snailrestaurant.mapper.OrderMapper;
 import com.woniuxy.snailrestaurant.service.OrderService;
 import io.swagger.annotations.*;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import javax.validation.Validation;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Api(tags = "订单")
 @RestController
@@ -45,7 +51,7 @@ public class OrderController {
             }
     )
     @PostMapping
-    CustomResponse pay(@Param("orderNum") String orderNum,@Valid @NotNull(message = "pay method is needed") Integer methodId) {
+    CustomResponse pay(@Param("orderNum") String orderNum, @Valid @NotNull(message = "pay method is needed") Integer methodId) {
         return null;
     }
 
@@ -53,7 +59,7 @@ public class OrderController {
     @ApiOperation(value = "订单支付款")
     @PostMapping("/pay")
     boolean creatOrder(String orderNum,Integer methodId) {
-        return os.payOrder(orderNum,methodId);
+        return os.payOrder(orderNum, methodId);
     }
 
 
@@ -66,9 +72,9 @@ public class OrderController {
     @ApiOperation(value = "删除订单信息e")
     @DeleteMapping("/{orderNumber}")
     int deleteOrderInfo(@PathVariable("orderNumber") @ApiParam(name = "orderNumber", value = "订单号码") String orderNumber,
-                                     @CurrentUser CurrentUserInfo info) {
+                        @CurrentUser CurrentUserInfo info) {
         Integer userId = info.getId();
-        int delete = os.delete(orderNumber,userId);
+        int delete = os.delete(orderNumber, userId);
         return delete;
     }
 

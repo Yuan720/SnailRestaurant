@@ -43,6 +43,8 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order>
     OrderItemService orderItemService;
     @Autowired
     CouponPackageService couponPackageService;
+    @Autowired
+    PaymentHandlerFactory paymentHandlerFactory;
 
     @Transactional
     @Override
@@ -105,6 +107,8 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order>
         return true;
     }
 
+
+    @Transactional
     @Override
     public boolean payOrder(String orderNum, Integer methodId) {
         PaymentMethod method = null;
@@ -128,10 +132,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order>
                 new BusinessException(CommonResultCode.INVALID_PARAM);
         }
 
-        switch (methodId) {
-
-        }
-        PaymentHandler instance = PaymentHandlerFactory.getInstance(method);
+        PaymentHandler instance = paymentHandlerFactory.getInstance(method);
         return instance.handlePayment(orderNum);
     }
 }
