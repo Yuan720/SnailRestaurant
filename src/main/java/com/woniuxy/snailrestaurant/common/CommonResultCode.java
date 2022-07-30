@@ -11,6 +11,7 @@ public enum CommonResultCode {
     SOME_DISHES_OUT_OF_STOCK(10008,"部分菜品已无库存！"),
     NO_SUCH_COUPON(10009,"优惠券不存在"),
     NO_SUCH_ORDER(10010,"订单不存在"),
+    FAIL_RECEIVE(10012,"优惠券截止日期已过或者已达到领取优惠券上限张数"),
     INVALID_COUPON(10011,"优惠券无效");;
 
     CommonResultCode(Integer code, String msg) {

@@ -2,9 +2,11 @@ package com.woniuxy.snailrestaurant.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.woniuxy.snailrestaurant.common.CommonResultCode;
 import com.woniuxy.snailrestaurant.domain.Coupon;
 import com.woniuxy.snailrestaurant.domain.CouponPackage;
 import com.woniuxy.snailrestaurant.domain.User;
+import com.woniuxy.snailrestaurant.exception.BusinessException;
 import com.woniuxy.snailrestaurant.mapper.CouponMapper;
 import com.woniuxy.snailrestaurant.mapper.CouponPackageMapper;
 import com.woniuxy.snailrestaurant.service.UserService;
@@ -35,6 +37,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     @Override
     public int receiveCoupon(int userId,int couponId) {
 
+        LambdaQueryWrapper<CouponPackage> lqw = new LambdaQueryWrapper<>();
+        lqw.eq(CouponPackage::getCouponId,couponId);
+        int count = couponPackageMapper.selectCount(lqw);
         Coupon coupon = couponMapper.selectById(couponId);
         int couponleft = coupon.getLeft();
         Date date = new Date();
@@ -42,7 +47,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         ft.format(date);
         CouponPackage couponPackage = new CouponPackage();
         int insert = 0;
-        if(couponleft > 0 & date.before(coupon.getEndTime()) & date.after(coupon.getStartTime())){
+
+        if(couponleft > 0 & date.before(coupon.getEndTime()) & date.after(coupon.getStartTime()) & count<coupon.getLimitPer()){
             couponleft = couponleft-1;
             coupon.setLeft(couponleft);
             couponMapper.updateById(coupon);
@@ -51,6 +57,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             couponPackage.setPickTime(date);
             couponPackage.setStatus(0);
             insert = couponPackageMapper.insert(couponPackage);
+        }else {
+            throw new BusinessException(CommonResultCode.FAIL_RECEIVE);
         }
         return insert;
     }
