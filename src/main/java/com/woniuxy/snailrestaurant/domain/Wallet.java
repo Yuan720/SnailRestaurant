@@ -2,16 +2,16 @@ package com.woniuxy.snailrestaurant.domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+
 import lombok.Data;
 
 /**
- * 
  * @TableName wallet
  */
 @Data
 public class Wallet implements Serializable {
     /**
-     * 
+     *
      */
     private Integer id;
 
@@ -24,6 +24,8 @@ public class Wallet implements Serializable {
      * 余额
      */
     private BigDecimal balance;
+    private double totalConsum;
+    private int use_times;
 
     /**
      * 状态

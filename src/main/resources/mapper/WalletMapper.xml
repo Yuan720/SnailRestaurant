@@ -9,6 +9,8 @@
             <result property="userId" column="user_id" jdbcType="INTEGER"/>
             <result property="balance" column="balance" jdbcType="DECIMAL"/>
             <result property="status" column="status" jdbcType="TINYINT"/>
+            <result property="totalConsum" column="total_consum" jdbcType="DECIMAL"/>
+            <result property="use_times" column="use_times" jdbcType="INTEGER" />
     </resultMap>
 
     <sql id="Base_Column_List">
