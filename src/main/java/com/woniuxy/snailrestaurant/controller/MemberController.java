@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -31,8 +32,8 @@ public class MemberController {
 
     @GetMapping("/list")
     public Page<MemberDetailVo> listMember(MemberCardQo memberCardQo,
-                                           Integer current,
-                                           Integer size) {
+                                           @RequestParam(value = "page",defaultValue = "1")  Integer current,
+                                           @RequestParam(value = "size",defaultValue = "10")   Integer size) {
 
         return memberCardService.listByCond(memberCardQo,current,size);
 
