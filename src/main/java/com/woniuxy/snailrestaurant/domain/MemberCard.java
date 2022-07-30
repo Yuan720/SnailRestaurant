@@ -12,7 +12,7 @@ import lombok.Data;
 @Data
 public class MemberCard implements Serializable {
     /**
-     * 
+     *
      */
     private Integer id;
 
@@ -39,12 +39,6 @@ public class MemberCard implements Serializable {
     /**
      * 使用次数
      */
-    private Integer useTimes;
-
-    /**
-     * 总消费额
-     */
-    private Integer totalConsum;
 
     /**
      * 创建日期
@@ -57,7 +51,7 @@ public class MemberCard implements Serializable {
     private String tel;
 
     /**
-     * 
+     *
      */
     private String sex;
 
