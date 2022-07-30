@@ -64,18 +64,19 @@ public class OrderController {
 
 
     @ApiOperation(value = "获取订单信息")
-    @GetMapping("/{orderNumber}")
-    IPage<Order> getOrderInfo(@PathVariable("orderNumber") @ApiParam(name = "orderNumber", value = "订单号码") String orderNumber) {
-        return null;
+    @GetMapping("/{orderStatus}")
+    IPage<Order> getOrderInfo(@RequestParam(value = "offset", defaultValue = "0", required = false) int offset,
+                              @RequestParam(value = "pageSize", defaultValue = "15", required = false) int pageSize,
+                              @CurrentUser CurrentUserInfo info,
+                              @ApiParam(name = "orderStatus", value = "订单状态") @RequestParam(value = "orderStatus")  int orderStatus) {
+        return os.selectByOrderStatus(offset,pageSize,info.getId(),orderStatus);
     }
 
     @ApiOperation(value = "删除订单信息e")
     @DeleteMapping("/{orderNumber}")
     int deleteOrderInfo(@PathVariable("orderNumber") @ApiParam(name = "orderNumber", value = "订单号码") String orderNumber,
                                      @CurrentUser CurrentUserInfo info) {
-        Integer userId = info.getId();
-        int delete = os.delete(orderNumber,userId);
-        return delete;
+        return os.delete(orderNumber,info.getId());
     }
 
     @ApiOperation(value = "取消订单")
