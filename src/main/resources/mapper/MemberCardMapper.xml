@@ -27,7 +27,7 @@
 
     <select id="selectBycondion" resultType="com.woniuxy.snailrestaurant.domain.vo.MemberDetailVo">
 
-        SELECT mc.`id` mcID,u.`user_name` userName,mc.`level` leavel,
+        SELECT mc.`id` mcID,u.`user_name` userName,mc.`level` level,
         w.`use_times` userTimes,w.`total_consum` totalConsum,w.`balance` balance,
         m.`name` mcName,u.`tel` tel,w.`status` status
         FROM member_card AS mc
