@@ -6,6 +6,7 @@ import java.util.Date;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * 优惠券
@@ -21,6 +22,7 @@ public class Coupon implements Serializable {
     /**
      * 价值
      */
+    @TableField("`value`")
     private BigDecimal value;
 
     /**
@@ -36,6 +38,7 @@ public class Coupon implements Serializable {
     /**
      * 类型 1.全部满减 2.全部打折 3.指定满减 4.指定折扣
      */
+    @TableField("`type`")
     private Integer type;
 
     /**
@@ -51,11 +54,13 @@ public class Coupon implements Serializable {
     /**
      * 有效期开始时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date startTime;
 
     /**
      * 有效期截至日期
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date endTime;
 
     /**
@@ -73,8 +78,11 @@ public class Coupon implements Serializable {
      */
     private Integer sceneFor;
 
-
-
+    /**
+     * 剩余数量
+     */
+    @TableField("`left`")
+    private Integer left;
 
     private static final long serialVersionUID = 1L;
 }

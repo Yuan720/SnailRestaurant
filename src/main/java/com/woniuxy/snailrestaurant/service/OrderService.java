@@ -15,10 +15,10 @@ public interface OrderService extends IService<Order> {
     /**
      * 删除订单
      * @param orderNumber
-     * @param user_id
+     * @param userId
      * @return
      */
-    int delete(String orderNumber,Integer user_id);
+    int delete(String orderNumber,Integer userId);
 
     boolean createOrder(OrderDTO dto, CurrentUserInfo info);
     boolean payOrder(String orderNum, Integer methodId);

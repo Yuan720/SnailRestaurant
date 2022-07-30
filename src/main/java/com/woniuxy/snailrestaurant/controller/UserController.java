@@ -20,10 +20,13 @@ import java.util.Objects;
 @RestController
 @RequestMapping("/user")
 public class UserController {
+
     @Autowired
     UserService service;
+
     @Value("${jwt.secretkey}")
     String secretKey;
+
     @ApiOperation(value = "用户登录,返回jwt令牌")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "user", value = "用户账号,密码,json封装", required = true)
@@ -68,9 +71,16 @@ public class UserController {
     }
 
     @ApiOperation(value = "更新用户信息")
-    @PutMapping
-    int updateUser(@RequestBody @ApiParam(name = "user", value = "用户信息") User user) {
+    @PutMapping("/updateuser")
+    int updateUser(@CurrentUser CurrentUserInfo info) {
         return 0;
+    }
+
+    @ApiOperation(value = "领取优惠券")
+    @PutMapping("/updateCoupon")
+    int updateCoupon(@CurrentUser CurrentUserInfo info,
+                     @RequestParam int couponId) {
+        return service.receiveCoupon(info.getId(),couponId);
     }
 
 }

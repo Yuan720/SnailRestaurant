@@ -9,5 +9,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2022-07-25 20:27:41
 */
 public interface UserService extends IService<User> {
-
+    int receiveCoupon(int userId,int couponId);
 }

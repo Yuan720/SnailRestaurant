@@ -1,5 +1,6 @@
 package com.woniuxy.snailrestaurant.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.woniuxy.snailrestaurant.common.CommonResultCode;
@@ -12,6 +13,7 @@ import com.woniuxy.snailrestaurant.domain.Order;
 import com.woniuxy.snailrestaurant.domain.OrderItem;
 import com.woniuxy.snailrestaurant.domain.dto.OrderDTO;
 import com.woniuxy.snailrestaurant.exception.BusinessException;
+import com.woniuxy.snailrestaurant.mapper.OrderItemMapper;
 import com.woniuxy.snailrestaurant.payment.PaymentHandler;
 import com.woniuxy.snailrestaurant.payment.PaymentHandlerFactory;
 import com.woniuxy.snailrestaurant.service.CouponPackageService;
@@ -22,11 +24,8 @@ import com.woniuxy.snailrestaurant.mapper.OrderMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.annotation.Validated;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.annotation.Resource;
 import java.util.*;
 
 /**
@@ -41,13 +40,24 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order>
     DishesService dishesService;
     @Autowired
     OrderItemService orderItemService;
+    @Resource
+    OrderMapper orderMapper;
+    @Resource
+    OrderItemMapper orderItemMapper;
     @Autowired
     CouponPackageService couponPackageService;
 
     @Transactional
     @Override
-    public int delete(String orderNumber, Integer user_id) {
-        return 0;
+    public int delete(String orderNumber, Integer userId) {
+        LambdaQueryWrapper<Order> lqw1 = new LambdaQueryWrapper<Order>();
+        lqw1.eq(Order::getId,orderNumber);
+        lqw1.eq(Order::getUserId,userId);
+        int delete = orderMapper.delete(lqw1);
+        LambdaQueryWrapper<OrderItem> lqw2 = new LambdaQueryWrapper<OrderItem>();
+        lqw2.eq(OrderItem::getOrderNumber,orderNumber);
+        orderItemMapper.delete(lqw2);
+        return delete;
     }
 
 

@@ -4,8 +4,11 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * 卡包
@@ -17,6 +20,7 @@ public class CouponPackage implements Serializable {
     /**
      * 主键
      */
+    @TableId(type = IdType.AUTO)
     private Integer id;
 
     /**
@@ -33,13 +37,14 @@ public class CouponPackage implements Serializable {
     /**
      * 领取时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date pickTime;
 
 
     /**
      * 状态,是否领取,是否过期,是否使用
      */
-    private String status;
+    private Integer status;
 
 
 

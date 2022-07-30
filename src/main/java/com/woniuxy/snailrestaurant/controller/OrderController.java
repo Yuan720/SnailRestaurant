@@ -63,7 +63,7 @@ public class OrderController {
                               @RequestParam(value = "pageSize", defaultValue = "15", required = false) int pageSize,
                               @CurrentUser CurrentUserInfo info,
                               @ApiParam(name = "orderStatus", value = "订单状态") @RequestParam(value = "orderStatus")  int orderStatus) {
-        return os.selectByOrderStatus(offset,pageSize,info.getId(),orderStatus);
+        return null;
     }
 
     @ApiOperation(value = "删除订单信息e")
