@@ -5,11 +5,16 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.woniuxy.snailrestaurant.common.CommonResultCode;
 import com.woniuxy.snailrestaurant.common.CurrentUserInfo;
 import com.woniuxy.snailrestaurant.common.OrderNumberGenerator;
+import com.woniuxy.snailrestaurant.common.PaymentMethod;
+import com.woniuxy.snailrestaurant.domain.CouponPackage;
 import com.woniuxy.snailrestaurant.domain.Dishes;
 import com.woniuxy.snailrestaurant.domain.Order;
 import com.woniuxy.snailrestaurant.domain.OrderItem;
 import com.woniuxy.snailrestaurant.domain.dto.OrderDTO;
 import com.woniuxy.snailrestaurant.exception.BusinessException;
+import com.woniuxy.snailrestaurant.payment.PaymentHandler;
+import com.woniuxy.snailrestaurant.payment.PaymentHandlerFactory;
+import com.woniuxy.snailrestaurant.service.CouponPackageService;
 import com.woniuxy.snailrestaurant.service.DishesService;
 import com.woniuxy.snailrestaurant.service.OrderItemService;
 import com.woniuxy.snailrestaurant.service.OrderService;
@@ -17,11 +22,12 @@ import com.woniuxy.snailrestaurant.mapper.OrderMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import java.util.*;
 
 /**
  * @author LeeYuan
@@ -35,6 +41,8 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order>
     DishesService dishesService;
     @Autowired
     OrderItemService orderItemService;
+    @Autowired
+    CouponPackageService couponPackageService;
 
     @Transactional
     @Override
@@ -46,6 +54,10 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order>
     @Transactional
     @Override
     public boolean createOrder(OrderDTO dto, CurrentUserInfo info) {
+        CouponPackage byCondition = couponPackageService.findByCondition(dto.getCouponPackageId(), info.getId(), dto.getCouponId());
+        if (Objects.isNull(byCondition)) {
+            throw new BusinessException(CommonResultCode.NO_SUCH_COUPON);
+        }
         Order order = new Order();
         String orderNumber = OrderNumberGenerator.createOrderNumber(info.getId(), dto.getType());
         order.setCreateTime(new Date())
@@ -53,7 +65,8 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order>
                 .setUserId(info.getId()).setDeliverInfoId(dto.getDeliverInfoId())
                 .setMerchantId(dto.getMachineId()).setRemark(dto.getRemark())
                 .setType(dto.getType()).setSeatId(dto.getSeatId())
-                .setTableware(dto.getTableware()).setId(orderNumber);
+                .setTableware(dto.getTableware()).setId(orderNumber)
+                .setCouponPackageId(dto.getCouponPackageId());
         HashMap<Integer, Integer> disheInfo = dto.getDisheInfo();
         Set<Integer> dishes = disheInfo.keySet();
         QueryWrapper<Dishes> wrapper = new QueryWrapper<>();
@@ -94,7 +107,32 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order>
 
     @Override
     public boolean payOrder(String orderNum, Integer methodId) {
-        return false;
+        PaymentMethod method = null;
+        switch (methodId) {
+            case 0:
+                method = PaymentMethod.WX_PAY;
+                break;
+            case 1:
+                method = PaymentMethod.ALIPAY;
+                break;
+            case 2:
+                method = PaymentMethod.CASH_PAY;
+                break;
+            case 3:
+                method = PaymentMethod.BANKCARD_PAY;
+                break;
+            case 4:
+                method = PaymentMethod.MEMBER_CARD_PAY;
+                break;
+            default:
+                new BusinessException(CommonResultCode.INVALID_PARAM);
+        }
+
+        switch (methodId) {
+
+        }
+        PaymentHandler instance = PaymentHandlerFactory.getInstance(method);
+        return instance.handlePayment(orderNum);
     }
 }
 

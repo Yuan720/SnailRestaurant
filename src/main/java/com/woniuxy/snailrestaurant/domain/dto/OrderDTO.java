@@ -27,5 +27,6 @@ public class OrderDTO {
     String remark;
     //餐具数量
     Integer tableware;
+    Integer couponPackageId;
 
 }

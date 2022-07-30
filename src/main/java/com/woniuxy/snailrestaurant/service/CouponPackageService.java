@@ -16,4 +16,5 @@ import java.util.List;
 */
 public interface CouponPackageService extends IService<CouponPackage> {
     IPage<CouponPackage> findByUserId(int offset, int pageSize, int userId, int status);
+  CouponPackage findByCondition( Integer id, Integer userId,Integer couponId);
 }
