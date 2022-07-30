@@ -77,7 +77,7 @@ public class UserController {
     }
 
     @ApiOperation(value = "领取优惠券")
-    @PutMapping("/updateCoupon")
+    @GetMapping("/coupon")
     int updateCoupon(@CurrentUser CurrentUserInfo info,
                      @RequestParam int couponId) {
         return service.receiveCoupon(info.getId(),couponId);
