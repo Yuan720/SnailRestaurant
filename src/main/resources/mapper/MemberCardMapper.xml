@@ -10,8 +10,6 @@
         <result property="balance" column="balance" jdbcType="DECIMAL"/>
         <result property="merchantId" column="merchant_id" jdbcType="INTEGER"/>
         <result property="level" column="level" jdbcType="TINYINT"/>
-        <result property="useTimes" column="use_times" jdbcType="INTEGER"/>
-        <result property="totalConsum" column="total_consum" jdbcType="DECIMAL"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
         <result property="tel" column="tel" jdbcType="VARCHAR"/>
         <result property="sex" column="sex" jdbcType="CHAR"/>
