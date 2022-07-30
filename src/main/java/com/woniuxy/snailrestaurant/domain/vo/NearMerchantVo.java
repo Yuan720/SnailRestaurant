@@ -5,6 +5,6 @@ import lombok.Data;
 
 @Data
 public class NearMerchantVo {
-    Double distance;
-    Merchant merchant;
+    Double distance;//距离
+    Merchant merchant;//商家信息
 }

@@ -5,16 +5,16 @@
 <mapper namespace="com.woniuxy.snailrestaurant.mapper.MemberCardMapper">
 
     <resultMap id="BaseResultMap" type="com.woniuxy.snailrestaurant.domain.MemberCard">
-            <id property="id" column="id" jdbcType="INTEGER"/>
-            <result property="userId" column="user_id" jdbcType="INTEGER"/>
-            <result property="balance" column="balance" jdbcType="DECIMAL"/>
-            <result property="merchantId" column="merchant_id" jdbcType="INTEGER"/>
-            <result property="level" column="level" jdbcType="TINYINT"/>
-            <result property="useTimes" column="use_times" jdbcType="INTEGER"/>
-            <result property="totalConsum" column="total_consum" jdbcType="DECIMAL"/>
-            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-            <result property="tel" column="tel" jdbcType="VARCHAR"/>
-            <result property="sex" column="sex" jdbcType="CHAR"/>
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="balance" column="balance" jdbcType="DECIMAL"/>
+        <result property="merchantId" column="merchant_id" jdbcType="INTEGER"/>
+        <result property="level" column="level" jdbcType="TINYINT"/>
+        <result property="useTimes" column="use_times" jdbcType="INTEGER"/>
+        <result property="totalConsum" column="total_consum" jdbcType="DECIMAL"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="tel" column="tel" jdbcType="VARCHAR"/>
+        <result property="sex" column="sex" jdbcType="CHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -23,4 +23,29 @@
         total_consum,create_time,tel,
         sex
     </sql>
+
+
+    <select id="selectBycondion" resultType="com.woniuxy.snailrestaurant.domain.vo.MemberDetailVo">
+
+        SELECT mc.`id` mcID,u.`user_name` userName,mc.`level` leavel,
+        w.`use_times` userTimes,w.`total_consum` totalConsum,w.`balance` balance,
+        m.`name` mcName,u.`tel` tel,w.`status` status
+        FROM member_card AS mc
+        INNER JOIN `user` AS u
+        ON mc.`user_id`=u.`id`
+        INNER JOIN merchant AS m
+        ON mc.`merchant_id`=m.`id`
+        INNER JOIN wallet AS w
+        ON w.`user_id`=u.`id`
+        <where>
+            <if test="mq.memberId !=null and mq.memberId !=''">
+                and u.id=#{mq.memberId}
+            </if>
+            <if test="mq.merchantId !=null and mq.merchantId !=''">
+                and m.id=#{mq.merchantId}
+            </if>
+        </where>
+    </select>
+
+
 </mapper>
