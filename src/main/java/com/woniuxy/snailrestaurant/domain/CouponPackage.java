@@ -35,6 +35,7 @@ public class CouponPackage implements Serializable {
      */
     private Date pickTime;
 
+
     /**
      * 状态,是否领取,是否过期,是否使用
      */

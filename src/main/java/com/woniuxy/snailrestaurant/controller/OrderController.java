@@ -1,28 +1,22 @@
 package com.woniuxy.snailrestaurant.controller;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.woniuxy.snailrestaurant.common.*;
-import com.woniuxy.snailrestaurant.domain.Dishes;
+import com.woniuxy.snailrestaurant.common.CurrentUser;
+import com.woniuxy.snailrestaurant.common.CurrentUserInfo;
+import com.woniuxy.snailrestaurant.common.CustomResponse;
 import com.woniuxy.snailrestaurant.domain.Order;
-import com.woniuxy.snailrestaurant.domain.OrderItem;
-import com.woniuxy.snailrestaurant.domain.User;
 import com.woniuxy.snailrestaurant.domain.dto.OrderDTO;
 import com.woniuxy.snailrestaurant.mapper.OrderMapper;
-import com.woniuxy.snailrestaurant.service.DishesService;
-import com.woniuxy.snailrestaurant.service.OrderItemService;
 import com.woniuxy.snailrestaurant.service.OrderService;
 import io.swagger.annotations.*;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 @Api(tags = "订单")
 @RestController
@@ -51,15 +45,15 @@ public class OrderController {
             }
     )
     @PostMapping
-    CustomResponse pay(@Param("orderNum") String orderNum, Integer methodId) {
+    CustomResponse pay(@Param("orderNum") String orderNum,@Valid @NotNull(message = "pay method is needed") Integer methodId) {
         return null;
     }
 
 
     @ApiOperation(value = "订单支付款")
     @PostMapping("/pay")
-    int creatOrder(String orderNum) {
-        return 0;
+    boolean creatOrder(String orderNum,Integer methodId) {
+        return os.payOrder(orderNum,methodId);
     }
 
 

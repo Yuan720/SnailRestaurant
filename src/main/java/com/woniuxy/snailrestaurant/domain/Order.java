@@ -115,6 +115,7 @@ A/B/C/D
 待制作,准备中,已制作
      */
     private String prepareStatus;
+    private Integer couponPackageId;
 
     @TableField(exist=false)
     private List<OrderItem> items;

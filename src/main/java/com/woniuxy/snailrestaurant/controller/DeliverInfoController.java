@@ -13,7 +13,8 @@ import javax.annotation.Resource;
 
 
 @Api(tags = "地址信息")
-@RestController("/deliverInfo")
+@RestController
+@RequestMapping("/deliver")
 public class DeliverInfoController {
     @Resource
     private DeliverInfoService dis;
@@ -21,7 +22,6 @@ public class DeliverInfoController {
     @ApiOperation(value = "获取用户收餐信息表")
     @GetMapping("/list")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "用户id", required = true),
             @ApiImplicitParam(name = "offset", value = "分页起始值"),
             @ApiImplicitParam(name = "pageSize", value = "分页大小")
     })

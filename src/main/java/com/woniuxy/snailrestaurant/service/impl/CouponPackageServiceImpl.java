@@ -33,6 +33,16 @@ public class CouponPackageServiceImpl extends ServiceImpl<CouponPackageMapper, C
         IPage<CouponPackage>  a = couponPackageMapper.findPage(page,qw);
         return a;
     }
+
+    @Override
+    public CouponPackage findByCondition(Integer id, Integer userId,  Integer couponId) {
+        QueryWrapper<CouponPackage> qw = new QueryWrapper<CouponPackage>();
+        qw.eq("id",id);
+        qw.eq("user_id",userId);
+        qw.eq("coupon_id",couponId);
+        CouponPackage find = getOne(qw);
+        return find;
+    }
 }
 
 
