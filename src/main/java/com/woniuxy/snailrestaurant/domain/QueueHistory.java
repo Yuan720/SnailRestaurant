@@ -2,6 +2,9 @@ package com.woniuxy.snailrestaurant.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 /**
@@ -11,8 +14,9 @@ import lombok.Data;
 @Data
 public class QueueHistory implements Serializable {
     /**
-     * 
+     *
      */
+    @TableId(type = IdType.AUTO)
     private Integer id;
 
     /**
@@ -21,7 +25,7 @@ public class QueueHistory implements Serializable {
     private Integer userId;
 
     /**
-     * 
+     *
      */
     private String number;
 
@@ -34,6 +38,7 @@ public class QueueHistory implements Serializable {
      * 当前状态
      */
     private Integer status;
+    private String tableType;
 
     private static final long serialVersionUID = 1L;
 }
