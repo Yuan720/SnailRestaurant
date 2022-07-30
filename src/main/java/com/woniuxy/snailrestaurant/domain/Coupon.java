@@ -77,6 +77,9 @@ public class Coupon implements Serializable {
      * 使用场景
      */
     private Integer sceneFor;
+    @TableField(exist = false)
+    private Coupon coupon;
+
 
     /**
      * 剩余数量

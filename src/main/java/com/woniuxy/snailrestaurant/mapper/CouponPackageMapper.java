@@ -17,7 +17,8 @@ import java.util.List;
 * @Entity com.woniuxy.snailrestaurant.domain.CouponPackage
 */
 public interface CouponPackageMapper extends BaseMapper<CouponPackage> {
-
+    @Select("select * from coupon_package as cp inner join coupon as c on " +
+            " cp.coupon_id = c.id ${ew.customSqlSegment}")
     IPage<CouponPackage> findPage(IPage page, @Param("ew") Wrapper wrapper);
 }
 

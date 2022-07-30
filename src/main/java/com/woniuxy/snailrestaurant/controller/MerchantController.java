@@ -37,7 +37,6 @@ public class MerchantController {
             stringBuilder.append(longitude);
             stringBuilder.append(" ");
             stringBuilder.append(latitude);
-            stringBuilder.append(")");
             String query = stringBuilder.toString();
             Page<List<NearMerchantVo>> near = service.getNear(nearMerchantVoPage, query);
             return near;
