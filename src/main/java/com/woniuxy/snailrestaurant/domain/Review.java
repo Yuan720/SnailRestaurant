@@ -20,12 +20,10 @@ public class Review implements Serializable {
      */
     @TableId(type = IdType.AUTO)
     private Integer id;
-
     /**
      * 外键,指向菜品
      */
     private Integer dishesId;
-
     /**
      * 评论内容
      */
