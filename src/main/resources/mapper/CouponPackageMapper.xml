@@ -10,11 +10,27 @@
             <result property="couponId" column="coupon_id" jdbcType="INTEGER"/>
             <result property="pickTime" column="pick_time" jdbcType="TIMESTAMP"/>
             <result property="status" column="status" jdbcType="VARCHAR"/>
+            <association property="coupon" javaType="com.woniuxy.snailrestaurant.domain.Coupon">
+                <id property="id" column="id" jdbcType="INTEGER"/>
+                <result property="value" column="value" jdbcType="DECIMAL"/>
+                <result property="minimumPay" column="minimum_pay" jdbcType="DECIMAL"/>
+                <result property="limitMerchantId" column="limit_merchant_id" jdbcType="INTEGER"/>
+                <result property="type" column="type" jdbcType="TINYINT"/>
+                <result property="discount" column="discount" jdbcType="TINYINT"/>
+                <result property="dishesSetId" column="dishes_set_id" jdbcType="INTEGER"/>
+                <result property="startTime" column="start_time" jdbcType="TIMESTAMP"/>
+                <result property="endTime" column="end_time" jdbcType="TIMESTAMP"/>
+                <result property="total" column="total" jdbcType="INTEGER"/>
+                <result property="limitPer" column="limit_per" jdbcType="INTEGER"/>
+                <result property="sceneFor" column="scene_for" jdbcType="TINYINT"/>
+            </association>
     </resultMap>
 
     <sql id="Base_Column_List">
         id,user_id,coupon_id,
         pick_time,status
     </sql>
-
+    <select id="findPage" resultMap="BaseResultMap">
+        select * from coupon_package as cp inner join coupon as c on cp.coupon_id = c.id ${ew.customSqlSegment}
+    </select>
 </mapper>

@@ -3,6 +3,8 @@ package com.woniuxy.snailrestaurant.domain;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 
 /**
@@ -13,7 +15,7 @@ import lombok.Data;
 public class Coupon implements Serializable {
     /**
      * 主键
-     *
+     */
     private Integer id;
 
     /**
@@ -70,6 +72,9 @@ public class Coupon implements Serializable {
      * 使用场景
      */
     private Integer sceneFor;
+
+
+
 
     private static final long serialVersionUID = 1L;
 }
