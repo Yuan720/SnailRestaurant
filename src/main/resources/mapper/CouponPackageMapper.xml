@@ -9,6 +9,7 @@
             <result property="userId" column="user_id" jdbcType="INTEGER"/>
             <result property="couponId" column="coupon_id" jdbcType="INTEGER"/>
             <result property="pickTime" column="pick_time" jdbcType="TIMESTAMP"/>
+            <result property="status" column="status" jdbcType="INTEGER"/>
             <result property="status" column="status" jdbcType="VARCHAR"/>
             <association property="coupon" javaType="com.woniuxy.snailrestaurant.domain.Coupon">
                 <id property="id" column="id" jdbcType="INTEGER"/>

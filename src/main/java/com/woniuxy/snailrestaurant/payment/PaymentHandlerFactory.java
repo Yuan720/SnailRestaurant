@@ -3,22 +3,31 @@ package com.woniuxy.snailrestaurant.payment;
 
 import com.woniuxy.snailrestaurant.common.PaymentMethod;
 import com.woniuxy.snailrestaurant.payment.impl.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PaymentHandlerFactory {
-    private static PaymentHandler wxHandler = new WechatPayHandler();
-    private static PaymentHandler bankHandler = new BankCardPayHandler();
-    private static PaymentHandler cashHandler = new CashPayHandler();
-    private static PaymentHandler memberHandler = new MemberCardPayHandler();
-    private static PaymentHandler alipayHandler = new AlipayHandler();
+    @Autowired
+    private  WechatPayHandler wechatPayHandler;
 
-   public static PaymentHandler getInstance(PaymentMethod method) {
+    @Autowired
+    private BankCardPayHandler bankHandler;
+    @Autowired
+    private CashPayHandler cashPayHandler;
+    @Autowired
+    private MemberCardPayHandler memberHandler;
+    @Autowired
+    private  AlipayHandler alipayHandler;
+
+    public  PaymentHandler getInstance(PaymentMethod method) {
         switch (method.getPaymentMethod()) {
             case 0:
-                return wxHandler;
+                return wechatPayHandler;
             case 1:
                 return alipayHandler;
             case 2:
-                return cashHandler;
+                return cashPayHandler;
             case 3:
                 return bankHandler;
             case 4:
